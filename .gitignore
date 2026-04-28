@@ -1,0 +1,16 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# Node (if you ever add a build step)
+node_modules/
+.next/
+dist/
+.cache/
