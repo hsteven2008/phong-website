@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Phong Hoang — Flyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 1200px;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #0b1220;
+    }
+
+    .flyer {
+      width: 1200px;
+      min-height: 1200px;
+      padding: 56px 64px 48px;
+      background:
+        radial-gradient(ellipse 70% 50% at 80% 0%, rgba(37, 99, 235, 0.25), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 0% 100%, rgba(124, 58, 237, 0.20), transparent 60%),
+        linear-gradient(135deg, #0b1220 0%, #0f172a 50%, #1e293b 100%);
+      color: #fff;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* Subtle grid pattern overlay */
+    .flyer::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* Header row: logo + status */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .logo img {
+      height: 56px; width: auto; display: block;
+    }
+    .logo-text {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .status {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 18px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 999px;
+      font-size: 14px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: #6ee7b7;
+    }
+    .status::before {
+      content: ""; width: 10px; height: 10px;
+      border-radius: 50%; background: #10b981;
+      box-shadow: 0 0 0 4px rgba(16,185,129,0.25);
+    }
+
+    /* Main hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-text { min-width: 0; }
+    .hero h1 {
+      font-size: 84px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 12px;
+    }
+    .hero h2 {
+      font-size: 34px;
+      font-weight: 600;
+      color: #93c5fd;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero-meta {
+      font-size: 22px;
+      color: #cbd5e1;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-meta .dot {
+      width: 6px; height: 6px;
+      background: #475569;
+      border-radius: 50%;
+    }
+
+    .photo-wrap {
+      width: 220px; height: 220px;
+      border-radius: 24px;
+      padding: 4px;
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      box-shadow: 0 24px 48px -12px rgba(37, 99, 235, 0.4);
+      flex-shrink: 0;
+    }
+    .photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      display: block;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative; z-index: 1;
+    }
+    .stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 46px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(135deg, #60a5fa 0%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Sections */
+    .section {
+      position: relative; z-index: 1;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 8px;
+    }
+    .pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .pill {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .pill-cert {
+      background: rgba(37, 99, 235, 0.18);
+      border: 1px solid rgba(37, 99, 235, 0.4);
+      color: #bfdbfe;
+    }
+    .pill-skill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #e2e8f0;
+    }
+    .pill-lang {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(124, 58, 237, 0.25));
+      border: 1px solid rgba(124, 58, 237, 0.4);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Footer / CTA */
+    .footer {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      position: relative; z-index: 1;
+    }
+    .cta-text {
+      flex: 1;
+    }
+    .cta-text .lookin {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .cta-text .scope {
+      font-size: 16px;
+      color: #94a3b8;
+    }
+    .cta-action {
+      text-align: right;
+    }
+    .cta-action .reply {
+      font-size: 24px;
+      font-weight: 700;
+      color: #60a5fa;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .cta-action .resume {
+      font-size: 14px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+<div class="flyer">
+
+  <div class="header">
+    <div class="logo">
+      <img src="assets/logo@4x.png" alt="" />
+      <span class="logo-text">Phong Hoang</span>
+    </div>
+    <span class="status">Available Now</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Phong Hoang</h1>
+      <h2>Cloud Support / IT Operations Engineer</h2>
+      <div class="hero-meta">
+        <span>Houston, TX</span>
+        <span class="dot"></span>
+        <span>4+ years in IT</span>
+        <span class="dot"></span>
+        <span>Bilingual EN · VI · ZH</span>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <img src="assets/profile-full.jpg" alt="Phong Hoang" />
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">95%</span>
+      <span class="stat-label">First-Contact Resolution</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">200+</span>
+      <span class="stat-label">Users Supported</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">6</span>
+      <span class="stat-label">CompTIA Certs</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Languages Spoken</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-eyebrow">Certifications</div>
+    <div class="pills">
+      <span class="pill pill-cert">CompTIA A+</span>
+      <span class="pill pill-cert">Network+</span>
+      <span class="pill pill-cert">Security+</span>
+      <span class="pill pill-cert">CIOS</span>
+      <span class="pill pill-cert">CSIS</span>
+      <span class="pill pill-cert">Linux Essentials</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-eyebrow">Core Stack</div>
+    <div class="pills">
+      <span class="pill pill-skill">Active Directory</span>
+      <span class="pill pill-skill">Microsoft 365</span>
+      <span class="pill pill-skill">Entra ID / Azure AD</span>
+      <span class="pill pill-skill">Intune (MDM)</span>
+      <span class="pill pill-skill">ConnectWise</span>
+      <span class="pill pill-skill">IT Glue</span>
+      <span class="pill pill-skill">ImmyBot</span>
+      <span class="pill pill-skill">GitHub</span>
+      <span class="pill pill-skill">Vercel</span>
+      <span class="pill pill-skill">PowerShell</span>
+      <span class="pill pill-skill">DNS / DHCP</span>
+      <span class="pill pill-skill">SSL / TLS</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="cta-text">
+      <div class="lookin">Looking for Cloud Support or IT Operations roles</div>
+      <div class="scope">Houston metro · Onsite or hybrid · Available now</div>
+    </div>
+    <div class="cta-action">
+      <div class="reply">Reply to this post</div>
+      <div class="resume">Full resume sent on request</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
