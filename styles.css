@@ -91,13 +91,30 @@ ul { padding-left: 1.2rem; }
   height: 68px;
 }
 .nav-logo {
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
   color: var(--text);
+  text-decoration: none;
+  line-height: 1;
 }
 .nav-logo:hover { color: var(--text); }
-.nav-logo-dot { color: var(--accent); }
+.nav-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+  /* Crisp downscaling on HiDPI */
+  image-rendering: -webkit-optimize-contrast;
+}
+.nav-logo-text {
+  display: inline-block;
+}
+@media (max-width: 480px) {
+  .nav-logo-text { display: none; }
+}
 
 .nav-links {
   display: flex;
