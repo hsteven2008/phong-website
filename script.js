@@ -254,7 +254,14 @@
     modalIsClosing = true;
     modal.classList.remove('open');
     document.body.style.overflow = '';
-    modal.addEventListener('transitionend', function handler() {
+    // Safety timeout in case transitionend never fires (e.g. transition disabled)
+    var closeTimer = setTimeout(function () {
+      modal.hidden = true;
+      modalIsClosing = false;
+      if (lastFocused) { try { lastFocused.focus(); } catch (e) {} }
+    }, 400);
+    modal.addEventListener('transitionend', function () {
+      clearTimeout(closeTimer);
       modal.hidden = true;
       modalIsClosing = false;
       if (lastFocused) { try { lastFocused.focus(); } catch (e) {} }

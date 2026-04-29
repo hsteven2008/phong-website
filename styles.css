@@ -1113,7 +1113,7 @@ ul { padding-left: 1.2rem; }
   .hero       { padding: 40px 0 32px; }
 
   /* Hero: stack CTA buttons full-width, tighten stats */
-  .hero-cta .btn      { flex: 1 1 100%; justify-content: center; }
+  .hero-cta .btn      { flex: 0 1 100%; justify-content: center; }
   .hero-cta           { gap: 10px; margin-bottom: 28px; }
   .hero-stats         { gap: 10px; }
   .stat-num           { font-size: 1.35rem; }
@@ -1155,7 +1155,7 @@ ul { padding-left: 1.2rem; }
   .modal-overlay      { padding: 12px; }
   .modal-dialog       { padding: 20px 16px; border-radius: var(--radius); }
   .modal-image-wrap   { margin: 0 -16px 16px; }
-  .modal-title        { font-size: 1.2rem; margin: 0 40px 18px 0; }
+  .modal-title        { font-size: 1.2rem; margin: 0 48px 18px 0; }
   .modal-section p    { font-size: 0.92rem; }
   .modal-yt-btn       { width: 100%; justify-content: center; }
   .modal-body         { gap: 16px; }
