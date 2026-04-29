@@ -12,9 +12,9 @@ Plain HTML + CSS + minimal JS. **No build step** — `index.html` runs directly 
 
 ## Files
 
-- `index.html` — single-page. Sections: Hero, About, Experience, Skills, Certifications, Creative (with a "Selected projects" sub-grid carried over from the old Webflow site), Contact. Inline `<head>` script sets `data-theme="dark"` before paint to prevent FOUC.
-- `styles.css` — full design system as CSS variables in `:root`, with a `[data-theme="dark"]` block that overrides the palette. Light base: white + deep-navy dark sections + blue (`#2563eb`) accent. Dark base: deep navy with `#60a5fa` accent. Animations live at the bottom: hero entrance stagger, photo float/glow, and `.reveal` / `.reveal-stagger` for scroll-triggered fades. `prefers-reduced-motion` kills all of it.
-- `script.js` — sticky-nav scroll state, mobile hamburger, theme toggle (persists to `localStorage`, follows system preference until user picks), IntersectionObserver that tags `.section-title`/`.section-eyebrow`/etc. with `.reveal` and grid containers with `.reveal-stagger`, project-detail modal (click a `.project-card[data-project]` to open; data lives in the `projectData` object in script.js), auto-update copyright year. Self-invoking function, no dependencies.
+- `index.html` — single-page. Sections: Hero, About, Experience, Skills, Certifications, Creative (with a "Selected projects" sub-grid of 7 cards), Contact. Inline `<head>` script sets `data-theme="dark"` before paint to prevent FOUC.
+- `styles.css` — full design system as CSS variables in `:root`, with a `[data-theme="dark"]` block that overrides the palette. Light base: white + deep-navy dark sections + blue (`#2563eb`) accent. Dark base: deep navy with `#60a5fa` accent. Animations at the bottom: hero entrance stagger, photo float/glow, `.reveal` / `.reveal-stagger` scroll fades, project modal styles (image, YouTube button, chips). `prefers-reduced-motion` kills all motion.
+- `script.js` — sticky-nav scroll state, mobile hamburger, theme toggle (persists to `localStorage`, follows system preference until user picks), IntersectionObserver for `.reveal`/`.reveal-stagger`, project-detail modal (`projectData` object keyed by `data-project` attribute — each entry has `tag`, `title`, `about`, `process`, `tools[]`, and optional `image` and `youtubeUrl` fields), auto-update copyright year. Self-invoking function, no dependencies.
 - `assets/profile.jpg` (12 KB) — cropped headshot.
 - `assets/profile-full.jpg` (76 KB) — full headshot, used in hero.
 
@@ -30,7 +30,7 @@ Plain HTML + CSS + minimal JS. **No build step** — `index.html` runs directly 
 
 - Resume at `..\Resume 2026\Phong_Hoang_Resume_2026.docx` is the source of truth for all factual content (job titles, dates, bullets, certs, education).
 - Photos sourced from `C:\Users\woong\Desktop\Personal\Phong_ProfileImage*.jpg`.
-- Old Webflow site informed the section structure (About / Projects / Contact pattern) but content was rewritten for the new lane.
+- Old Webflow site (`phong-hoangs-site.webflow.io`) sourced the 7 creative projects. CDN images confirmed working for Cereal Box and Movie Poster. YouTube links confirmed for: Beyond The Apex, Sports Balls Store, A Can of Animated Coke, Flip Booklet Animation, Venti Air Moving Day.
 
 ## Things NOT to add
 
