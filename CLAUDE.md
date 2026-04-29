@@ -12,9 +12,9 @@ Plain HTML + CSS + minimal JS. **No build step** — `index.html` runs directly 
 
 ## Files
 
-- `index.html` — single-page. Sections: Hero, About, Experience, Skills, Certifications, Creative, Contact.
-- `styles.css` — full design system as CSS variables in `:root`. Modern professional palette: white base, deep navy for dark sections, blue (`#2563eb`) accent.
-- `script.js` — sticky-nav scroll state, mobile hamburger, auto-update copyright year. Self-invoking function, no dependencies.
+- `index.html` — single-page. Sections: Hero, About, Experience, Skills, Certifications, Creative (with a "Selected projects" sub-grid carried over from the old Webflow site), Contact. Inline `<head>` script sets `data-theme="dark"` before paint to prevent FOUC.
+- `styles.css` — full design system as CSS variables in `:root`, with a `[data-theme="dark"]` block that overrides the palette. Light base: white + deep-navy dark sections + blue (`#2563eb`) accent. Dark base: deep navy with `#60a5fa` accent. Animations live at the bottom: hero entrance stagger, photo float/glow, and `.reveal` / `.reveal-stagger` for scroll-triggered fades. `prefers-reduced-motion` kills all of it.
+- `script.js` — sticky-nav scroll state, mobile hamburger, theme toggle (persists to `localStorage`, follows system preference until user picks), IntersectionObserver that tags `.section-title`/`.section-eyebrow`/etc. with `.reveal` and grid containers with `.reveal-stagger`, project-detail modal (click a `.project-card[data-project]` to open; data lives in the `projectData` object in script.js), auto-update copyright year. Self-invoking function, no dependencies.
 - `assets/profile.jpg` (12 KB) — cropped headshot.
 - `assets/profile-full.jpg` (76 KB) — full headshot, used in hero.
 

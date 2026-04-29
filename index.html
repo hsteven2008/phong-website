@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Phong Hoang — Cloud Support / IT Operations Engineer</title>
   <meta name="description" content="Cloud Support / IT Operations Engineer with 4+ years in IT, including MSP support, endpoint management, and cloud-deployed production environments. Houston, TX." />
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png" />
   <link rel="apple-touch-icon" sizes="192x192" href="assets/favicon-192.png" />
@@ -21,17 +32,28 @@
         <img src="assets/logo@4x.png" srcset="assets/logo@4x.png 1x, assets/logo@8x.png 2x" alt="Phong Hoang logo" class="nav-logo-img" />
         <span class="nav-logo-text">Phong Hoang</span>
       </a>
-      <nav class="nav-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#certifications">Certs</a>
-        <a href="#creative">Creative</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#certifications">Certs</a>
+          <a href="#creative">Creative</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -293,6 +315,55 @@
             <p>2D and 3D animation experiments — kept current as a personal interest.</p>
           </div>
         </div>
+
+        <div class="projects-block">
+          <h3 class="projects-heading">Selected projects</h3>
+          <div class="projects-grid">
+
+            <article class="project-card" data-project="cereal-box" role="button" tabindex="0" aria-label="View details: Cereal Box — Pikachu">
+              <span class="project-tag">Graphic Design</span>
+              <h4 class="project-title">Cereal Box — Pikachu</h4>
+              <p class="project-desc">Cereal-box concept in Adobe Illustrator. Vector character drawn with the pen tool, paired with custom type and supporting imagery.</p>
+              <span class="project-more">View project</span>
+            </article>
+
+            <article class="project-card" data-project="movie-poster" role="button" tabindex="0" aria-label="View details: Detective Comedy Poster">
+              <span class="project-tag">Graphic Design</span>
+              <h4 class="project-title">Detective Comedy Poster</h4>
+              <p class="project-desc">Movie poster for a fictional detective comedy — composited a dog protagonist, actor, crime scene, and weapon iconography into one layout.</p>
+              <span class="project-more">View project</span>
+            </article>
+
+            <article class="project-card" data-project="beyond-apex" role="button" tabindex="0" aria-label="View details: Beyond The Apex">
+              <span class="project-tag">Live Action + 2D</span>
+              <h4 class="project-title">Beyond The Apex</h4>
+              <p class="project-desc">Short film blending filmed footage with 2D animated elements — production, editing, and frame-by-frame animation in one pipeline.</p>
+              <span class="project-more">View project</span>
+            </article>
+
+            <article class="project-card" data-project="sports-balls" role="button" tabindex="0" aria-label="View details: Sports Balls Store">
+              <span class="project-tag">2D Animation</span>
+              <h4 class="project-title">Sports Balls Store</h4>
+              <p class="project-desc">Stylized 2D animated commercial — character motion, timing, and a short narrative around a sports-equipment storefront.</p>
+              <span class="project-more">View project</span>
+            </article>
+
+            <article class="project-card" data-project="coke-can" role="button" tabindex="0" aria-label="View details: A Can of Animated Coke">
+              <span class="project-tag">Animation</span>
+              <h4 class="project-title">A Can of Animated Coke</h4>
+              <p class="project-desc">Product animation bringing a Coke can to life with motion design principles — easing, timing, and squash/stretch.</p>
+              <span class="project-more">View project</span>
+            </article>
+
+            <article class="project-card" data-project="flip-book" role="button" tabindex="0" aria-label="View details: Flip Booklet Animation">
+              <span class="project-tag">Flip Book</span>
+              <h4 class="project-title">Flip Booklet Animation</h4>
+              <p class="project-desc">Hand-drawn, frame-by-frame animation produced entirely with pen and paper — a study in motion fundamentals.</p>
+              <span class="project-more">View project</span>
+            </article>
+
+          </div>
+        </div>
       </div>
     </section>
 
@@ -333,6 +404,18 @@
       <span class="footer-meta">Built with HTML, CSS, and a little bit of JavaScript.</span>
     </div>
   </footer>
+
+  <!-- PROJECT MODAL -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-dialog">
+      <button class="modal-close" type="button" aria-label="Close project details">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <span class="modal-tag" id="modal-tag"></span>
+      <h3 class="modal-title" id="modal-title"></h3>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
