@@ -1101,20 +1101,23 @@ ul { padding-left: 1.2rem; }
     left: 0;
     right: 0;
     background: var(--nav-mobile-bg);
-    /* backdrop-filter removed from nav-links — nested backdrop-filter
-       (parent .nav also has one) renders a ghost blur at the original
-       fixed position even when the element is transformed off-screen,
-       creating a visible "strike line" over the logo on mobile Chrome/Edge */
     flex-direction: column;
     padding: 24px var(--pad-x) 32px;
     gap: 8px;
     border-bottom: 1px solid var(--border);
     transform: translateY(-110%);
-    transition: transform .25s;
+    /* visibility:hidden makes the closed menu fully invisible —
+       background, border, and shadow don't render even though the
+       element's transformed geometry still overlaps the nav bar area */
+    visibility: hidden;
+    transition: transform .25s, visibility 0s .25s;
     box-shadow: var(--shadow);
-    will-change: transform;
   }
-  .nav-links.open { transform: translateY(0); }
+  .nav-links.open {
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform .25s, visibility 0s 0s;
+  }
   .nav-links a    { padding: 10px 0; font-size: 1rem; }
   .nav-links a::after { display: none; }
   .hero-stats     { grid-template-columns: repeat(2, 1fr); }
