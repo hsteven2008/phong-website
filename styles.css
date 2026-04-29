@@ -156,6 +156,7 @@ ul { padding-left: 1.2rem; }
 .nav-inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 68px;
 }
 .nav-logo {
@@ -178,14 +179,12 @@ ul { padding-left: 1.2rem; }
   .nav-logo:hover .nav-logo-img { transform: rotate(-6deg) scale(1.05); }
 }
 
+/* nav-right holds only theme-toggle + hamburger — no overflow needed */
 .nav-right {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 16px;
+  flex-shrink: 0;
 }
 .nav-logo-img {
   height: 38px;
