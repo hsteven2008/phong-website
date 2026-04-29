@@ -173,10 +173,15 @@ ul { padding-left: 1.2rem; }
 }
 .nav-logo:hover { color: var(--text); transform: translateY(-1px); }
 .nav-logo-img { transition: transform .25s ease; }
-.nav-logo:hover .nav-logo-img { transform: rotate(-6deg) scale(1.05); }
+/* Logo rotation only on true pointer devices — avoids Safari mobile clipping */
+@media (hover: hover) and (pointer: fine) {
+  .nav-logo:hover .nav-logo-img { transform: rotate(-6deg) scale(1.05); }
+}
 
 .nav-right {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: flex-end;
