@@ -160,7 +160,7 @@
     'flip-book': {
       tag: 'Traditional Animation',
       title: 'Flip Booklet Animation',
-      youtubeUrl: null,
+      youtubeUrl: 'https://www.youtube.com/watch?v=d0_ovzncJz4',
       about: 'A hand-drawn flip book animation — no software, just pen and paper. This was a foundational exercise: understanding frame rate, spacing, and how the eye perceives motion when there\'s nothing between you and the drawing.',
       process: 'Sketched every frame individually on separate pages, building movement progressively from one page to the next. Getting smooth motion required thinking about spacing — frames close together feel slow, frames far apart feel fast. The physical limitation of the medium forced clear decision-making about what to animate and what to imply.',
       tools: ['Pen and paper', 'Traditional animation', 'Frame spacing', 'Motion fundamentals']
