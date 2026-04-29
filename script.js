@@ -142,9 +142,9 @@
       tools: ['Video production', '2D animation', 'Video editing', 'Storyboarding']
     },
     'sports-balls': {
-      tag: '2D Animation',
+      tag: '3D Animation',
       title: 'Sports Balls Store',
-      youtubeUrl: null,
+      youtubeUrl: 'https://www.youtube.com/watch?v=zRcryefi5BU',
       about: 'A 2D animated commercial concept for a fictional sports-equipment retailer. The brief was self-assigned: tell a short, clear brand story through character movement and timing alone — no voiceover, just animation.',
       process: 'Designed the characters and storefront, storyboarded the commercial arc, then animated frame by frame. The main focus was on easing — making bouncing sports balls feel physically convincing — and on building a simple narrative beat (problem → store → solution) in a very short runtime.',
       tools: ['2D animation', 'Character design', 'Storyboarding', 'Motion timing']
