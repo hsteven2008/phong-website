@@ -32,6 +32,7 @@
       const isOpen = navLinks.classList.toggle('open');
       navToggle.classList.toggle('open', isOpen);
       navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     });
 
     navLinks.querySelectorAll('a').forEach(function (a) {
@@ -66,8 +67,15 @@
       root.classList.remove('theme-transitioning');
     }, 320);
   }
-  // Initialize aria from whatever the inline head script set
-  applyTheme(currentTheme(), false);
+  // Initialize aria labels from whatever the inline head script set — don't
+  // call applyTheme() here because that adds theme-transitioning on load.
+  (function () {
+    var t = currentTheme();
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      themeToggle.setAttribute('aria-pressed', String(t === 'dark'));
+    }
+  }());
 
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
@@ -191,10 +199,19 @@
   var modalBody     = document.getElementById('modal-body');
   var modalClose    = modal && modal.querySelector('.modal-close');
   var lastFocused   = null;
+  var modalIsClosing = false;
+
+  function getFocusableInModal() {
+    if (!modal) return [];
+    return Array.from(modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+  }
 
   function openModal(projectId) {
     var data = projectData[projectId];
-    if (!data || !modal) return;
+    if (!data || !modal || !modalTag || !modalTitle || !modalBody) return;
+    if (modalIsClosing) return; // don't open while close transition is running
     lastFocused = document.activeElement;
 
     modalTag.textContent   = data.tag;
@@ -205,7 +222,7 @@
       : '';
 
     var ytHtml = data.youtubeUrl
-      ? '<a class="modal-yt-btn" href="' + data.youtubeUrl + '" target="_blank" rel="noopener">' +
+      ? '<a class="modal-yt-btn" href="' + data.youtubeUrl + '" target="_blank" rel="noopener" aria-label="Watch ' + data.title + ' on YouTube">' +
           '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>' +
           'Watch on YouTube' +
         '</a>'
@@ -233,14 +250,15 @@
   }
 
   function closeModal() {
-    if (!modal) return;
+    if (!modal || modal.hidden || modalIsClosing) return;
+    modalIsClosing = true;
     modal.classList.remove('open');
     document.body.style.overflow = '';
     modal.addEventListener('transitionend', function handler() {
       modal.hidden = true;
-      modal.removeEventListener('transitionend', handler);
-      if (lastFocused) lastFocused.focus();
-    });
+      modalIsClosing = false;
+      if (lastFocused) { try { lastFocused.focus(); } catch (e) {} }
+    }, { once: true });
   }
 
   // Open on card click or Enter/Space
@@ -263,9 +281,21 @@
     });
   }
 
-  // Escape key closes
+  // Escape closes; Tab is trapped inside modal
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && modal && !modal.hidden) closeModal();
+    if (!modal || modal.hidden) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab') {
+      var focusable = getFocusableInModal();
+      if (!focusable.length) { e.preventDefault(); return; }
+      var first = focusable[0];
+      var last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    }
   });
 
   // ---------- Auto-update copyright year ----------

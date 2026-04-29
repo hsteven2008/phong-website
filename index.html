@@ -16,15 +16,54 @@
       } catch (e) {}
     })();
   </script>
+  <!-- Favicons & manifest -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png" />
   <link rel="apple-touch-icon" sizes="192x192" href="assets/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="assets/favicon-512.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://phong-website.vercel.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://phong-website.vercel.app/" />
+  <meta property="og:title"       content="Phong Hoang — Cloud Support / IT Operations Engineer" />
+  <meta property="og:description" content="Cloud Support / IT Operations Engineer with 4+ years in IT, MSP support, and cloud-native delivery. Houston, TX." />
+  <meta property="og:image"       content="https://phong-website.vercel.app/assets/profile-full.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Phong Hoang — Cloud Support / IT Operations Engineer" />
+  <meta name="twitter:description" content="Cloud Support / IT Operations Engineer with 4+ years in IT, MSP support, and cloud-native delivery. Houston, TX." />
+  <meta name="twitter:image"       content="https://phong-website.vercel.app/assets/profile-full.jpg" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Phong Hoang",
+    "url": "https://phong-website.vercel.app/",
+    "jobTitle": "Cloud Support / IT Operations Engineer",
+    "address": { "@type": "PostalAddress", "addressLocality": "Houston", "addressRegion": "TX" },
+    "sameAs": ["https://www.linkedin.com/in/pqhoang90"],
+    "image": "https://phong-website.vercel.app/assets/profile-full.jpg"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <a href="#top" class="skip-link">Skip to main content</a>
 
   <header class="nav" id="nav">
     <div class="nav-inner container">
@@ -80,7 +119,7 @@
           <div class="hero-stats">
             <div class="stat"><span class="stat-num">95%</span><span class="stat-label">First-contact resolution</span></div>
             <div class="stat"><span class="stat-num">200+</span><span class="stat-label">Users supported</span></div>
-            <div class="stat"><span class="stat-num">6</span><span class="stat-label">CompTIA certifications</span></div>
+            <div class="stat"><span class="stat-num">6</span><span class="stat-label">Certifications</span></div>
             <div class="stat"><span class="stat-num">4</span><span class="stat-label">Languages</span></div>
           </div>
         </div>
@@ -172,7 +211,7 @@
               <span class="job-date">Apr 2024 – Jul 2025</span>
               <span class="job-tag">MSP</span>
             </div>
-            <h3 class="job-role">IT Support Technician → Service Coordinator → Onboarding Technician</h3>
+            <h3 class="job-role">Onboarding Technician → Service Coordinator → IT Support Technician</h3>
             <p class="job-company">IronEdge Group <span class="job-loc">· Houston, TX</span></p>
             <ul class="job-bullets">
               <li><strong>Endpoint & Account Management —</strong> Provisioned, updated, and deprovisioned user accounts across Active Directory and Microsoft 365 for 100+ employees, enforcing RBAC policies.</li>

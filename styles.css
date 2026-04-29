@@ -90,6 +90,23 @@
               box-shadow 0.3s ease !important;
 }
 
+/* Skip-to-content link (visible only on keyboard focus) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 999;
+  transition: top .2s;
+}
+.skip-link:focus { top: 0; outline: 3px solid var(--accent-hover); outline-offset: 2px; }
+
 /* =====================================================
    Reset & Base
    ===================================================== */
@@ -1075,6 +1092,7 @@ ul { padding-left: 1.2rem; }
   .nav-links.open { transform: translateY(0); }
   .nav-links a    { padding: 10px 0; font-size: 1rem; }
   .nav-links a::after { display: none; }
+  .hero-stats     { grid-template-columns: repeat(2, 1fr); }
   .nav-toggle     { display: flex; }
   .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
@@ -1160,6 +1178,9 @@ ul { padding-left: 1.2rem; }
 .reveal-stagger.in > *:nth-child(7)  { transition-delay: 0.47s; }
 .reveal-stagger.in > *:nth-child(8)  { transition-delay: 0.54s; }
 .reveal-stagger.in > *:nth-child(9)  { transition-delay: 0.61s; }
+.reveal-stagger.in > *:nth-child(10) { transition-delay: 0.68s; }
+.reveal-stagger.in > *:nth-child(11) { transition-delay: 0.75s; }
+.reveal-stagger.in > *:nth-child(12) { transition-delay: 0.82s; }
 
 /* Honor system preference: kill all motion if requested */
 @media (prefers-reduced-motion: reduce) {
