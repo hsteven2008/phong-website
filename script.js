@@ -152,10 +152,18 @@
     'coke-can': {
       tag: 'Animation',
       title: 'A Can of Animated Coke',
-      youtubeUrl: null,
+      youtubeUrl: 'https://www.youtube.com/watch?v=BDuHDnsROn8',
       about: 'An animation exercise using a Coca-Cola can as the subject. The goal was to apply classic animation principles — squash and stretch, anticipation, follow-through, and ease-in/ease-out — to an everyday object and make it feel alive.',
       process: 'Planned the can\'s movement arc through thumbnail sketches, then animated the full sequence with careful attention to weight and timing. Each principle was tested in isolation before being combined: how does a can settle after being placed? How does it anticipate a jump? Iterated on motion curves until the movement felt natural.',
       tools: ['Animation principles', 'Motion design', 'Easing & timing', 'Frame-by-frame']
+    },
+    'venti-move': {
+      tag: 'Video Production',
+      title: 'Venti Air Products — Moving Day',
+      youtubeUrl: 'https://www.youtube.com/watch?v=jfAGsORe4u8',
+      about: 'A documentary-style video capturing Venti Air Products\' relocation from their old facility to a new one on May 12–13, 2023. Shot and edited while working there as Graphic Designer — this was part of the broader operations and IT support work that ran alongside the design role.',
+      process: 'Filmed the move in progress across both days, capturing the logistics of relocating a commercial operation — equipment, workspace setup, and the team in action. Edited the footage into a cohesive update video with dates and context.',
+      tools: ['Video production', 'On-site filming', 'Video editing', 'Documentation']
     },
     'flip-book': {
       tag: 'Traditional Animation',
