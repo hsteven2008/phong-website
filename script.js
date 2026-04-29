@@ -120,13 +120,15 @@
     'cereal-box': {
       tag: 'Graphic Design',
       title: 'Cereal Box — Pikachu',
-      about: 'A full product-packaging concept for a fictional Pikachu-themed cereal. The goal was to create something that felt shelf-ready — character illustration, food imagery, and marketing copy all working together.',
-      process: 'Hand-traced the Pikachu character as a vector in Adobe Illustrator using the pen tool, then built out supporting elements (cereal bowl, milk carton, individual cereal pieces) the same way. Composed the full box face with a unified color palette, product typography, and nutritional-style layout.',
-      tools: ['Adobe Illustrator', 'Vector illustration', 'Pen tool', 'Type layout']
+      image: 'https://cdn.prod.website-files.com/5ca5bbb1f9bc50572c5b3209/5caef719796381a279e45438_Cereal%20Box%20Project.jpg',
+      about: 'A product-packaging concept targeting organic-food consumers with young kids, designed to be both shelf-ready and character-driven. The brief called for an impactful illustration that would appeal to kids and Pokémon enthusiasts looking for a healthier breakfast option.',
+      process: 'Researched competitor packaging (Cocoa Puffs Brownie Crunch, Berry Bones Scooby-Doo) to identify what to differentiate from. Hand-traced Pikachu as a vector in Adobe Illustrator using the pen tool, built out supporting food elements (cereal bowl, milk, individual pieces), and composed the full box face with the Pokémon font, electric-shaped accents, and a consistent color palette designed to stand out on shelf.',
+      tools: ['Adobe Illustrator', 'Vector illustration', 'Pen tool', 'Product typography', 'Packaging layout']
     },
     'movie-poster': {
       tag: 'Graphic Design',
       title: 'Detective Comedy Movie Poster',
+      image: 'https://cdn.prod.website-files.com/5ca5bbb1f9bc50572c5b3209/5caf21815db33b54e8edcc32_Movie_Poster.jpg',
       about: 'A movie poster for a fictional detective comedy film. The central hook: a dog as the hard-boiled detective protagonist. The challenge was to play the absurdity straight — cinematic poster aesthetics applied to a clearly comedic premise.',
       process: 'Developed the concept, sourced reference images (dog, human actor, crime scene, weapon iconography), and composited them into a single believable poster layout. Applied typography hierarchy, tagline placement, and color treatment typical of genre film posters.',
       tools: ['Adobe Photoshop', 'Image compositing', 'Print layout', 'Typography']
@@ -134,6 +136,7 @@
     'beyond-apex': {
       tag: 'Live Action + 2D Animation',
       title: 'Beyond The Apex',
+      youtubeUrl: null,
       about: 'A short hybrid film blending filmed live-action footage with hand-drawn 2D animated elements. The project explored what happens when the real world and illustrated characters share the same frame — also produced as a separate 3D version.',
       process: 'Wrote and storyboarded the sequence, shot the live-action segments, edited the footage into a rough cut, and then integrated frame-by-frame 2D animation directly into the video. Managing both production pipelines in the same project required careful planning around timing and scale.',
       tools: ['Video production', '2D animation', 'Video editing', 'Storyboarding']
@@ -141,6 +144,7 @@
     'sports-balls': {
       tag: '2D Animation',
       title: 'Sports Balls Store',
+      youtubeUrl: null,
       about: 'A 2D animated commercial concept for a fictional sports-equipment retailer. The brief was self-assigned: tell a short, clear brand story through character movement and timing alone — no voiceover, just animation.',
       process: 'Designed the characters and storefront, storyboarded the commercial arc, then animated frame by frame. The main focus was on easing — making bouncing sports balls feel physically convincing — and on building a simple narrative beat (problem → store → solution) in a very short runtime.',
       tools: ['2D animation', 'Character design', 'Storyboarding', 'Motion timing']
@@ -148,6 +152,7 @@
     'coke-can': {
       tag: 'Animation',
       title: 'A Can of Animated Coke',
+      youtubeUrl: null,
       about: 'An animation exercise using a Coca-Cola can as the subject. The goal was to apply classic animation principles — squash and stretch, anticipation, follow-through, and ease-in/ease-out — to an everyday object and make it feel alive.',
       process: 'Planned the can\'s movement arc through thumbnail sketches, then animated the full sequence with careful attention to weight and timing. Each principle was tested in isolation before being combined: how does a can settle after being placed? How does it anticipate a jump? Iterated on motion curves until the movement felt natural.',
       tools: ['Animation principles', 'Motion design', 'Easing & timing', 'Frame-by-frame']
@@ -155,6 +160,7 @@
     'flip-book': {
       tag: 'Traditional Animation',
       title: 'Flip Booklet Animation',
+      youtubeUrl: null,
       about: 'A hand-drawn flip book animation — no software, just pen and paper. This was a foundational exercise: understanding frame rate, spacing, and how the eye perceives motion when there\'s nothing between you and the drawing.',
       process: 'Sketched every frame individually on separate pages, building movement progressively from one page to the next. Getting smooth motion required thinking about spacing — frames close together feel slow, frames far apart feel fast. The physical limitation of the medium forced clear decision-making about what to animate and what to imply.',
       tools: ['Pen and paper', 'Traditional animation', 'Frame spacing', 'Motion fundamentals']
@@ -175,13 +181,27 @@
 
     modalTag.textContent   = data.tag;
     modalTitle.textContent = data.title;
+
+    var imageHtml = data.image
+      ? '<div class="modal-image-wrap"><img src="' + data.image + '" alt="' + data.title + '" class="modal-image" loading="lazy" /></div>'
+      : '';
+
+    var ytHtml = data.youtubeUrl
+      ? '<a class="modal-yt-btn" href="' + data.youtubeUrl + '" target="_blank" rel="noopener">' +
+          '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>' +
+          'Watch on YouTube' +
+        '</a>'
+      : '';
+
     modalBody.innerHTML =
+      imageHtml +
       '<div class="modal-section"><div class="modal-section-label">About</div><p>' + data.about + '</p></div>' +
       '<div class="modal-section"><div class="modal-section-label">What was involved</div><p>' + data.process + '</p></div>' +
       '<div class="modal-section"><div class="modal-section-label">Tools &amp; techniques</div>' +
         '<div class="modal-chips">' +
           data.tools.map(function(t) { return '<span class="modal-chip">' + t + '</span>'; }).join('') +
-        '</div></div>';
+        '</div></div>' +
+      ytHtml;
 
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
