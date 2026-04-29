@@ -1071,6 +1071,8 @@ ul { padding-left: 1.2rem; }
   .hero-stats       { grid-template-columns: repeat(2, 1fr); }
   .about-grid       { grid-template-columns: 1fr; }
   .card             { position: static; }
+  /* Reduce heavy section padding on tablets */
+  .section          { padding: clamp(48px, 8vw, 120px) 0; }
 }
 
 @media (max-width: 720px) {
@@ -1098,6 +1100,65 @@ ul { padding-left: 1.2rem; }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .footer-inner   { flex-direction: column; text-align: center; }
+  /* Job meta wraps more gracefully on narrow screens */
+  .job-meta       { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+/* =====================================================
+   Small phones (≤ 480px)
+   ===================================================== */
+@media (max-width: 480px) {
+  /* Section spacing */
+  .section    { padding: 40px 0; }
+  .hero       { padding: 40px 0 32px; }
+
+  /* Hero: stack CTA buttons full-width, tighten stats */
+  .hero-cta .btn      { flex: 1 1 100%; justify-content: center; }
+  .hero-cta           { gap: 10px; margin-bottom: 28px; }
+  .hero-stats         { gap: 10px; }
+  .stat-num           { font-size: 1.35rem; }
+  .hero-summary       { font-size: 0.98rem; }
+
+  /* Cards — reduce padding so content breathes */
+  .job                { padding: 20px; }
+  .job-bullets li     { padding-left: 16px; font-size: 0.94rem; }
+  .skill-card         { padding: 18px 20px; }
+  .cert               { padding: 14px 16px; }
+  .creative-card      { padding: 18px 20px; }
+  .project-card       { padding: 16px 18px; }
+  .card               { padding: 20px; }
+  .education          { padding: 20px; }
+  .contact-card       { padding: 18px 16px; }
+
+  /* Contact value: allow wrapping instead of clipping on narrow cards */
+  .contact-value {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: break-word;
+    font-size: 0.9rem;
+  }
+
+  /* Section titles slightly smaller */
+  .section-title      { font-size: 1.7rem; margin-bottom: 28px; }
+
+  /* Timeline role title */
+  .job-role           { font-size: 1.1rem; }
+
+  /* Skill/cert grid: force single column so cards don't feel cramped */
+  .skills-grid,
+  .cert-grid,
+  .creative-grid,
+  .projects-grid      { grid-template-columns: 1fr; }
+
+  /* Modal: tighter fit on small phones */
+  .modal-overlay      { padding: 12px; }
+  .modal-dialog       { padding: 20px 16px; border-radius: var(--radius); }
+  .modal-image-wrap   { margin: 0 -16px 16px; }
+  .modal-title        { font-size: 1.2rem; margin: 0 40px 18px 0; }
+  .modal-section p    { font-size: 0.92rem; }
+  .modal-yt-btn       { width: 100%; justify-content: center; }
+  .modal-body         { gap: 16px; }
 }
 
 /* =====================================================
