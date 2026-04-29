@@ -136,7 +136,7 @@
     'beyond-apex': {
       tag: 'Live Action + 2D Animation',
       title: 'Beyond The Apex',
-      youtubeUrl: null,
+      youtubeUrl: 'https://www.youtube.com/watch?v=cJVcRRQmZkc',
       about: 'A short hybrid film blending filmed live-action footage with hand-drawn 2D animated elements. The project explored what happens when the real world and illustrated characters share the same frame — also produced as a separate 3D version.',
       process: 'Wrote and storyboarded the sequence, shot the live-action segments, edited the footage into a rough cut, and then integrated frame-by-frame 2D animation directly into the video. Managing both production pipelines in the same project required careful planning around timing and scale.',
       tools: ['Video production', '2D animation', 'Video editing', 'Storyboarding']
