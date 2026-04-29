@@ -1086,6 +1086,15 @@ ul { padding-left: 1.2rem; }
 }
 
 @media (max-width: 720px) {
+  /* Remove backdrop-filter from nav on mobile — the nav's blur creates a ghost
+     rendering artifact at y=68px (where nav-links is fixed) in Chrome/Edge,
+     appearing as a strike line over the logo. Nav is 98% opaque on mobile
+     so the blur effect is not needed here. */
+  .nav {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .nav-links {
     position: fixed;
     top: 68px;
