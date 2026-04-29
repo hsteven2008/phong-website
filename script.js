@@ -136,6 +136,8 @@
     'beyond-apex': {
       tag: 'Live Action + 2D Animation',
       title: 'Beyond The Apex',
+      image: 'https://img.youtube.com/vi/cJVcRRQmZkc/maxresdefault.jpg',
+      imageFit: 'cover',
       youtubeUrl: 'https://www.youtube.com/watch?v=cJVcRRQmZkc',
       about: 'A short hybrid film blending filmed live-action footage with hand-drawn 2D animated elements. The project explored what happens when the real world and illustrated characters share the same frame — also produced as a separate 3D version.',
       process: 'Wrote and storyboarded the sequence, shot the live-action segments, edited the footage into a rough cut, and then integrated frame-by-frame 2D animation directly into the video. Managing both production pipelines in the same project required careful planning around timing and scale.',
@@ -144,6 +146,8 @@
     'sports-balls': {
       tag: '3D Animation',
       title: 'Sports Balls Store',
+      image: 'https://img.youtube.com/vi/zRcryefi5BU/maxresdefault.jpg',
+      imageFit: 'cover',
       youtubeUrl: 'https://www.youtube.com/watch?v=zRcryefi5BU',
       about: 'A 2D animated commercial concept for a fictional sports-equipment retailer. The brief was self-assigned: tell a short, clear brand story through character movement and timing alone — no voiceover, just animation.',
       process: 'Designed the characters and storefront, storyboarded the commercial arc, then animated frame by frame. The main focus was on easing — making bouncing sports balls feel physically convincing — and on building a simple narrative beat (problem → store → solution) in a very short runtime.',
@@ -152,6 +156,8 @@
     'coke-can': {
       tag: 'Animation',
       title: 'A Can of Animated Coke',
+      image: 'https://img.youtube.com/vi/BDuHDnsROn8/maxresdefault.jpg',
+      imageFit: 'cover',
       youtubeUrl: 'https://www.youtube.com/watch?v=BDuHDnsROn8',
       about: 'An animation exercise using a Coca-Cola can as the subject. The goal was to apply classic animation principles — squash and stretch, anticipation, follow-through, and ease-in/ease-out — to an everyday object and make it feel alive.',
       process: 'Planned the can\'s movement arc through thumbnail sketches, then animated the full sequence with careful attention to weight and timing. Each principle was tested in isolation before being combined: how does a can settle after being placed? How does it anticipate a jump? Iterated on motion curves until the movement felt natural.',
@@ -160,6 +166,8 @@
     'venti-move': {
       tag: 'Video Production',
       title: 'Venti Air Products — Moving Day',
+      image: 'https://img.youtube.com/vi/jfAGsORe4u8/maxresdefault.jpg',
+      imageFit: 'cover',
       youtubeUrl: 'https://www.youtube.com/watch?v=jfAGsORe4u8',
       about: 'A documentary-style video capturing Venti Air Products\' relocation from their old facility to a new one on May 12–13, 2023. Shot and edited while working there as Graphic Designer — this was part of the broader operations and IT support work that ran alongside the design role.',
       process: 'Filmed the move in progress across both days, capturing the logistics of relocating a commercial operation — equipment, workspace setup, and the team in action. Edited the footage into a cohesive update video with dates and context.',
@@ -168,6 +176,8 @@
     'flip-book': {
       tag: 'Traditional Animation',
       title: 'Flip Booklet Animation',
+      image: 'https://img.youtube.com/vi/d0_ovzncJz4/maxresdefault.jpg',
+      imageFit: 'cover',
       youtubeUrl: 'https://www.youtube.com/watch?v=d0_ovzncJz4',
       about: 'A hand-drawn flip book animation — no software, just pen and paper. This was a foundational exercise: understanding frame rate, spacing, and how the eye perceives motion when there\'s nothing between you and the drawing.',
       process: 'Sketched every frame individually on separate pages, building movement progressively from one page to the next. Getting smooth motion required thinking about spacing — frames close together feel slow, frames far apart feel fast. The physical limitation of the medium forced clear decision-making about what to animate and what to imply.',
@@ -191,7 +201,7 @@
     modalTitle.textContent = data.title;
 
     var imageHtml = data.image
-      ? '<div class="modal-image-wrap"><img src="' + data.image + '" alt="' + data.title + '" class="modal-image" loading="lazy" /></div>'
+      ? '<div class="modal-image-wrap"><img src="' + data.image + '" alt="' + data.title + '" class="modal-image' + (data.imageFit === 'cover' ? ' modal-image--cover' : '') + '" loading="lazy" /></div>'
       : '';
 
     var ytHtml = data.youtubeUrl
