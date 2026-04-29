@@ -92,8 +92,8 @@
 
 /* Skip-to-content link (visible only on keyboard focus) */
 .skip-link {
-  position: absolute;
-  top: -100%;
+  position: fixed;   /* fixed = viewport-relative, not body-relative */
+  top: -100px;       /* concrete px, not %, so body containing-block bug can't fire */
   left: 16px;
   background: var(--accent);
   color: #fff;
@@ -112,8 +112,9 @@
    ===================================================== */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-/* Prevent any element from causing horizontal page scroll */
-body { overflow-x: hidden; }
+/* Prevent horizontal page scroll on html — safer than body (avoids
+   body becoming a containing block that breaks position:sticky + skip-link) */
+html { overflow-x: hidden; }
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -1091,7 +1092,10 @@ ul { padding-left: 1.2rem; }
     left: 0;
     right: 0;
     background: var(--nav-mobile-bg);
-    backdrop-filter: blur(14px);
+    /* backdrop-filter removed from nav-links — nested backdrop-filter
+       (parent .nav also has one) renders a ghost blur at the original
+       fixed position even when the element is transformed off-screen,
+       creating a visible "strike line" over the logo on mobile Chrome/Edge */
     flex-direction: column;
     padding: 24px var(--pad-x) 32px;
     gap: 8px;
@@ -1099,6 +1103,7 @@ ul { padding-left: 1.2rem; }
     transform: translateY(-110%);
     transition: transform .25s;
     box-shadow: var(--shadow);
+    will-change: transform;
   }
   .nav-links.open { transform: translateY(0); }
   .nav-links a    { padding: 10px 0; font-size: 1rem; }
