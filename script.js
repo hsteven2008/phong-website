@@ -356,6 +356,31 @@
     }
   });
 
+  // ---------- Scroll progress bar ----------
+  var progressBar = document.getElementById('scroll-progress');
+  function updateProgress() {
+    if (!progressBar) return;
+    var scrollTop  = window.scrollY;
+    var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (docHeight > 0 ? (scrollTop / docHeight * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ---------- Hero mouse-follow glow ----------
+  var heroEl = document.querySelector('.hero');
+  if (heroEl && !reduceMotion) {
+    heroEl.addEventListener('mousemove', function (e) {
+      var rect = heroEl.getBoundingClientRect();
+      heroEl.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+      heroEl.style.setProperty('--mouse-y', (e.clientY - rect.top)  + 'px');
+    });
+    heroEl.addEventListener('mouseleave', function () {
+      heroEl.style.setProperty('--mouse-x', '-999px');
+      heroEl.style.setProperty('--mouse-y', '-999px');
+    });
+  }
+
   // ---------- Auto-update copyright year ----------
   if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 })();
