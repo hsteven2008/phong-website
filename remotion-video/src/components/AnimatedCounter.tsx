@@ -33,7 +33,7 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   });
 
   const value = interpolate(progress, [0, 1], [0, target]);
-  const displayed = decimals > 0 ? value.toFixed(decimals) : Math.floor(value);
+  const displayed = decimals > 0 ? value.toFixed(decimals) : Math.round(value);
 
   return (
     <div style={{ textAlign: "center", minWidth: 200 }}>
