@@ -96,7 +96,7 @@
   // ---------- Scroll reveal ----------
   // Tag elements via JS so the HTML stays clean.
   const revealTargets = document.querySelectorAll(
-    '.section-eyebrow, .section-title, .section-lead, .about-text, .about-side, .education'
+    '.section-eyebrow, .section-title, .section-lead, .about-text, .about-side, .education, .video-wrapper'
   );
   revealTargets.forEach(function (el) { el.classList.add('reveal'); });
 
@@ -121,6 +121,57 @@
     // Fallback: just show everything
     document.querySelectorAll('.reveal, .reveal-stagger')
       .forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // ---------- Stat counter animation ----------
+  var statNums = document.querySelectorAll('.stat-num[data-count]');
+  if (statNums.length && !reduceMotion && 'IntersectionObserver' in window) {
+    function runCounter(el) {
+      var target   = parseInt(el.dataset.count, 10);
+      var suffix   = el.dataset.suffix || '';
+      var duration = 1500;
+      var startTime = null;
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        el.textContent = Math.round(easeOut(progress) * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    var counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          counterObserver.unobserve(entry.target);
+          // Delay for hero stats so counter starts after the hero entrance stagger finishes
+          var delay = entry.target.closest('.hero') ? 900 : 0;
+          setTimeout(function () { runCounter(entry.target); }, delay);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNums.forEach(function (el) { counterObserver.observe(el); });
+  }
+
+  // ---------- Nav active state ----------
+  var allSections  = document.querySelectorAll('main section[id]');
+  var navAnchors   = document.querySelectorAll('.nav-links a[href^="#"]');
+  if (allSections.length && navAnchors.length && 'IntersectionObserver' in window) {
+    var sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.id;
+          navAnchors.forEach(function (a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    // Trigger zone: top 35% of viewport — link activates when section enters that band
+    }, { rootMargin: '-15% 0px -65% 0px' });
+
+    allSections.forEach(function (s) { sectionObserver.observe(s); });
   }
 
   // ---------- Project modal ----------
