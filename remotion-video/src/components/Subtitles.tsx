@@ -76,7 +76,7 @@ export const Subtitles: React.FC = () => {
     <div
       style={{
         position: "absolute",
-        bottom: 52,
+        bottom: 220,
         left: "50%",
         transform: "translateX(-50%)",
         width: "82%",
