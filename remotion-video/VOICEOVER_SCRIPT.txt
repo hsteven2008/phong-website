@@ -1,0 +1,74 @@
+PHONG HOANG — PROFILE VIDEO VOICEOVER SCRIPT (v2)
+Total duration: ~88 seconds
+Generated for: remotion-video/public/voiceover.mp3
+
+HOW TO GENERATE
+---------------
+1. Go to elevenlabs.io → Text to Speech
+2. Recommended voice: "Adam" or "Josh" (natural, conversational male)
+3. Settings: Stability 50%, Similarity 75%, Style 30%
+4. Paste the script below, generate, download as MP3
+5. Replace remotion-video/public/voiceover.mp3
+6. Re-render: cd remotion-video && npm run render
+7. Copy output: cp out/phong-profile.mp4 ../assets/phong-profile.mp4
+
+CHANGES FROM v1
+---------------
+- Opening leads with your best metric BEFORE your name (employer feedback)
+- Added bridge sentence between IronEdge and CIRculate (felt like a cold jump)
+- Skills opener now names both worlds explicitly instead of "both worlds"
+- CTA now mentions phone number to match the on-screen card
+- LinkedIn is "handle pqhoang90" not spelled out character by character
+- Total runtime trimmed from 90s to 88s (tighter pacing)
+
+SPEAKING STYLE
+--------------
+Relaxed. Professional. Talk like you're telling a colleague about your career path.
+Pause naturally at em dashes (—) and sentence endings.
+Don't rush — the video gives you room.
+
+SCRIPT
+------
+
+[0:00 – 0:04 | INTRO]
+Most IT problems I touch get solved on the first call.
+I'm Phong Hoang — Cloud Support and IT Operations Engineer, based in Houston.
+
+[0:04 – 0:09 | TAGLINE]
+Problem solver. Builder. Reliable. Multilingual. Available now.
+
+[0:09 – 0:21 | STATS]
+Four-plus years in IT. The numbers: ninety-five percent first-contact resolution rate.
+Over two hundred users supported. Six CompTIA certifications. And I speak four languages.
+
+[0:21 – 0:35 | IRONEDGE]
+At IronEdge Group — one of Houston's largest MSPs — I grew from Onboarding Tech
+to IT Support Technician in fifteen months. That meant managing Active Directory and M365
+for over a hundred employees, handling fifty-plus tickets a week, and taking Tier-2
+escalations — AD replication, VPN, firewall.
+
+[0:35 – 0:47 | CIRCULATE]
+I wanted to see what I could build from scratch — so I joined CIRculate
+as their founding technical hire. I built and shipped a full SaaS product in sixty days —
+Next.js on Vercel, Neon Postgres, Auth0, Stripe. Zero to demo-ready. Owned the whole stack.
+
+[0:47 – 0:59 | SKILLS]
+My skills bridge traditional IT ops and modern cloud development.
+IT operations: Active Directory, M365, ConnectWise, ImmyBot, networking.
+Cloud-native: GitHub, Vercel, PowerShell, REST APIs.
+
+[0:59 – 1:07 | CERTS]
+Six CompTIA certifications — A-Plus, Network-Plus, Security-Plus, CIOS, CSIS,
+and Linux Essentials. The fundamentals are solid.
+
+[1:07 – 1:16 | LANGUAGES]
+One more thing — I speak four languages: English and Vietnamese natively,
+Mandarin and Cantonese fluently. For customer-facing roles or global teams,
+that's a real edge.
+
+[1:16 – 1:28 | CTA]
+I'm available now, open to onsite or hybrid in Houston.
+Call me at 832-641-2959, email at H-Steven-2008 at gmail,
+or find me on LinkedIn — handle pqhoang90. Let's talk.
+
+END OF SCRIPT

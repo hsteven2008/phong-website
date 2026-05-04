@@ -9,6 +9,8 @@ interface AnimatedCounterProps {
   prefix?: string;
   label: string;
   decimals?: number;
+  color?: string;
+  labelColor?: string;
 }
 
 export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
@@ -18,6 +20,8 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   prefix = "",
   label,
   decimals = 0,
+  color,
+  labelColor,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -37,7 +41,7 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
         style={{
           fontSize: 80,
           fontWeight: 800,
-          color: THEME.accentLight,
+          color: color ?? THEME.accentLight,
           fontFamily: THEME.fontFamily,
           lineHeight: 1,
           letterSpacing: "-2px",
@@ -48,7 +52,7 @@ export const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
       <div
         style={{
           fontSize: 18,
-          color: THEME.muted,
+          color: labelColor ?? THEME.muted,
           fontFamily: THEME.fontFamily,
           marginTop: 8,
           fontWeight: 500,

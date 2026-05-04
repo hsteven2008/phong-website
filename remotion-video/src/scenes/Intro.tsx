@@ -4,14 +4,19 @@ import { THEME } from "../theme";
 
 export const Intro: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
 
   const nameSpring = spring({ frame, fps, config: { damping: 30, stiffness: 60 } });
   const subtitleOpacity = interpolate(frame, [20, 40], [0, 1], { extrapolateRight: "clamp" });
   const subtitleY = interpolate(frame, [20, 45], [20, 0], { extrapolateRight: "clamp" });
-
   const glowOpacity = interpolate(frame, [0, 30], [0, 1], { extrapolateRight: "clamp" });
   const lineWidth = interpolate(nameSpring, [0, 1], [0, 320]);
+
+  const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
@@ -25,6 +30,7 @@ export const Intro: React.FC = () => {
         justifyContent: "center",
         position: "relative",
         overflow: "hidden",
+        opacity: fadeIn * exitOpacity,
       }}
     >
       {/* Background grid */}
@@ -77,7 +83,6 @@ export const Intro: React.FC = () => {
           Phong Hoang
         </div>
 
-        {/* Animated underline */}
         <div
           style={{
             height: 4,

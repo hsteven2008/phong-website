@@ -1,6 +1,6 @@
 import React from "react";
-import { interpolate, useCurrentFrame } from "remotion";
-import { THEME } from "../theme";
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { LIGHT } from "../theme";
 import { FadeIn } from "../components/FadeIn";
 import { SectionLabel } from "../components/SectionLabel";
 
@@ -14,19 +14,26 @@ const bullets = [
 
 export const IronEdge: React.FC = () => {
   const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
 
-  const slideIn = interpolate(frame, [0, 25], [-80, 0], {
+  const slideIn = interpolate(frame, [0, 28], [-80, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const opacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
+  const contentOpacity = interpolate(frame, [0, 22], [0, 1], { extrapolateRight: "clamp" });
+
+  const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
       style={{
         width: "100%",
         height: "100%",
-        background: THEME.bg,
+        background: LIGHT.bg,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -34,6 +41,7 @@ export const IronEdge: React.FC = () => {
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
+        opacity: fadeIn * exitOpacity,
       }}
     >
       {/* Left accent line */}
@@ -44,8 +52,19 @@ export const IronEdge: React.FC = () => {
           top: 0,
           bottom: 0,
           width: 4,
-          background: `linear-gradient(180deg, transparent, ${THEME.accent}, transparent)`,
-          opacity,
+          background: `linear-gradient(180deg, transparent, ${LIGHT.accent}, transparent)`,
+          opacity: contentOpacity,
+        }}
+      />
+
+      {/* Background grid */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px),
+            linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
         }}
       />
 
@@ -56,8 +75,10 @@ export const IronEdge: React.FC = () => {
           gap: 80,
           width: "100%",
           maxWidth: 1400,
-          opacity,
+          opacity: contentOpacity,
           transform: `translateX(${slideIn}px)`,
+          position: "relative",
+          zIndex: 2,
         }}
       >
         {/* Left: company info */}
@@ -68,8 +89,8 @@ export const IronEdge: React.FC = () => {
             style={{
               fontSize: 52,
               fontWeight: 800,
-              color: THEME.white,
-              fontFamily: THEME.fontFamily,
+              color: LIGHT.text,
+              fontFamily: LIGHT.fontFamily,
               letterSpacing: "-1.5px",
               lineHeight: 1.1,
               marginBottom: 20,
@@ -81,8 +102,8 @@ export const IronEdge: React.FC = () => {
           <div
             style={{
               fontSize: 22,
-              color: THEME.accentLight,
-              fontFamily: THEME.fontFamily,
+              color: LIGHT.accent,
+              fontFamily: LIGHT.fontFamily,
               fontWeight: 500,
               marginBottom: 16,
             }}
@@ -93,8 +114,8 @@ export const IronEdge: React.FC = () => {
           <div
             style={{
               fontSize: 17,
-              color: THEME.muted,
-              fontFamily: THEME.fontFamily,
+              color: LIGHT.muted,
+              fontFamily: LIGHT.fontFamily,
               lineHeight: 1.6,
             }}
           >
@@ -102,25 +123,19 @@ export const IronEdge: React.FC = () => {
             to IT Support Technician in 15 months.
           </div>
 
-          {/* Stat pill */}
-          <div
-            style={{
-              marginTop: 28,
-              display: "inline-flex",
-              gap: 12,
-            }}
-          >
+          {/* Role progression pills */}
+          <div style={{ marginTop: 28, display: "inline-flex", gap: 12 }}>
             {["Onboarding", "Service Coordinator", "IT Support"].map((role, i) => (
-              <FadeIn key={role} delay={30 + i * 15} duration={12} translateY={10}>
+              <FadeIn key={role} delay={35 + i * 30} duration={14} translateY={10}>
                 <div
                   style={{
                     fontSize: 13,
-                    color: THEME.accent,
-                    background: "rgba(37,99,235,0.1)",
-                    border: `1px solid ${THEME.border}`,
+                    color: LIGHT.accent,
+                    background: "rgba(37,99,235,0.08)",
+                    border: `1px solid ${LIGHT.border}`,
                     borderRadius: 20,
                     padding: "5px 14px",
-                    fontFamily: THEME.fontMono,
+                    fontFamily: LIGHT.fontMono,
                     fontWeight: 500,
                     whiteSpace: "nowrap",
                   }}
@@ -132,27 +147,28 @@ export const IronEdge: React.FC = () => {
           </div>
         </div>
 
-        {/* Right: bullets */}
+        {/* Right: bullets — 40-frame stagger for clear, readable reveal */}
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 18 }}>
           {bullets.map((b, i) => (
-            <FadeIn key={b.text} delay={20 + i * 20} duration={15} translateY={15}>
+            <FadeIn key={b.text} delay={25 + i * 40} duration={18} translateY={15}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "flex-start",
                   gap: 16,
-                  background: THEME.bgCard,
-                  border: `1px solid ${THEME.border}`,
+                  background: LIGHT.card,
+                  border: `1px solid ${LIGHT.border}`,
                   borderRadius: 12,
                   padding: "14px 18px",
+                  boxShadow: LIGHT.shadow,
                 }}
               >
                 <span style={{ fontSize: 20, flexShrink: 0, marginTop: 1 }}>{b.icon}</span>
                 <span
                   style={{
                     fontSize: 16,
-                    color: THEME.white,
-                    fontFamily: THEME.fontFamily,
+                    color: LIGHT.text,
+                    fontFamily: LIGHT.fontFamily,
                     lineHeight: 1.5,
                   }}
                 >

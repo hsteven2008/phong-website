@@ -1,20 +1,28 @@
 import React from "react";
-import { interpolate, useCurrentFrame } from "remotion";
-import { THEME } from "../theme";
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { LIGHT } from "../theme";
 import { AnimatedCounter } from "../components/AnimatedCounter";
 import { FadeIn } from "../components/FadeIn";
 
 export const Stats: React.FC = () => {
   const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
 
-  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const titleY = interpolate(frame, [0, 20], [20, 0], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 22], [0, 1], { extrapolateRight: "clamp" });
+  const titleY = interpolate(frame, [0, 22], [20, 0], { extrapolateRight: "clamp" });
 
+  const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  // 360 frames (12s) — 70-frame stagger gives each stat ~2.3s of solo visibility
   const stats = [
-    { delay: 20, target: 95, suffix: "%", label: "First-Contact Resolution" },
-    { delay: 50, target: 200, suffix: "+", label: "Users Supported" },
-    { delay: 80, target: 6, suffix: "", label: "CompTIA Certifications" },
-    { delay: 110, target: 4, suffix: "", label: "Languages Spoken" },
+    { delay: 30,  target: 95,  suffix: "%", label: "First-Contact Resolution" },
+    { delay: 100, target: 200, suffix: "+", label: "Users Supported" },
+    { delay: 170, target: 6,   suffix: "",  label: "CompTIA Certifications" },
+    { delay: 240, target: 4,   suffix: "",  label: "Languages Spoken" },
   ];
 
   return (
@@ -22,7 +30,7 @@ export const Stats: React.FC = () => {
       style={{
         width: "100%",
         height: "100%",
-        background: THEME.bg,
+        background: LIGHT.bg,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -30,9 +38,10 @@ export const Stats: React.FC = () => {
         gap: 60,
         position: "relative",
         overflow: "hidden",
+        opacity: fadeIn * exitOpacity,
       }}
     >
-      {/* Subtle top accent bar */}
+      {/* Top accent bar */}
       <div
         style={{
           position: "absolute",
@@ -40,7 +49,18 @@ export const Stats: React.FC = () => {
           left: 0,
           right: 0,
           height: 3,
-          background: `linear-gradient(90deg, transparent, ${THEME.accent}, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${LIGHT.accent}, transparent)`,
+        }}
+      />
+
+      {/* Background grid */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px),
+            linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
         }}
       />
 
@@ -49,6 +69,8 @@ export const Stats: React.FC = () => {
           opacity: titleOpacity,
           transform: `translateY(${titleY}px)`,
           textAlign: "center",
+          position: "relative",
+          zIndex: 2,
         }}
       >
         <div
@@ -57,8 +79,8 @@ export const Stats: React.FC = () => {
             fontWeight: 600,
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: THEME.accent,
-            fontFamily: THEME.fontMono,
+            color: LIGHT.accent,
+            fontFamily: LIGHT.fontMono,
             marginBottom: 12,
           }}
         >
@@ -68,8 +90,8 @@ export const Stats: React.FC = () => {
           style={{
             fontSize: 42,
             fontWeight: 700,
-            color: THEME.white,
-            fontFamily: THEME.fontFamily,
+            color: LIGHT.text,
+            fontFamily: LIGHT.fontFamily,
             letterSpacing: "-1px",
           }}
         >
@@ -82,15 +104,19 @@ export const Stats: React.FC = () => {
           display: "flex",
           gap: 80,
           alignItems: "flex-start",
+          position: "relative",
+          zIndex: 2,
         }}
       >
         {stats.map((s) => (
-          <FadeIn key={s.label} delay={s.delay} duration={18} translateY={20}>
+          <FadeIn key={s.label} delay={s.delay} duration={20} translateY={20}>
             <AnimatedCounter
               delay={s.delay}
               target={s.target}
               suffix={s.suffix}
               label={s.label}
+              color={LIGHT.accent}
+              labelColor={LIGHT.muted}
             />
           </FadeIn>
         ))}

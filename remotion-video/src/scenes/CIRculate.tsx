@@ -1,5 +1,5 @@
 import React from "react";
-import { interpolate, useCurrentFrame } from "remotion";
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { THEME } from "../theme";
 import { FadeIn } from "../components/FadeIn";
 import { SectionLabel } from "../components/SectionLabel";
@@ -10,16 +10,23 @@ const stack = [
 ];
 
 const highlights = [
-  { num: "60", unit: "days", desc: "Zero to demo-ready" },
-  { num: "1", unit: "hire", desc: "Founding technical hire" },
-  { num: "100%", unit: "", desc: "Production owned end-to-end" },
+  { num: "60",   unit: "days", desc: "Zero to demo-ready" },
+  { num: "1",    unit: "hire", desc: "Founding technical hire" },
+  { num: "100%", unit: "",     desc: "Production owned end-to-end" },
 ];
 
 export const CIRculate: React.FC = () => {
   const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
 
-  const opacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-  const slideIn = interpolate(frame, [0, 25], [80, 0], {
+  const contentOpacity = interpolate(frame, [0, 22], [0, 1], { extrapolateRight: "clamp" });
+  const slideIn = interpolate(frame, [0, 28], [80, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
@@ -37,6 +44,7 @@ export const CIRculate: React.FC = () => {
         boxSizing: "border-box",
         position: "relative",
         overflow: "hidden",
+        opacity: fadeIn * exitOpacity,
       }}
     >
       {/* Right accent line */}
@@ -48,7 +56,7 @@ export const CIRculate: React.FC = () => {
           bottom: 0,
           width: 4,
           background: `linear-gradient(180deg, transparent, ${THEME.accent}, transparent)`,
-          opacity,
+          opacity: contentOpacity,
         }}
       />
 
@@ -59,14 +67,14 @@ export const CIRculate: React.FC = () => {
           gap: 80,
           width: "100%",
           maxWidth: 1400,
-          opacity,
+          opacity: contentOpacity,
           transform: `translateX(${slideIn}px)`,
         }}
       >
         {/* Left: highlights */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 }}>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 22 }}>
           {highlights.map((h, i) => (
-            <FadeIn key={h.desc} delay={15 + i * 20} duration={15} translateY={15}>
+            <FadeIn key={h.desc} delay={20 + i * 35} duration={18} translateY={15}>
               <div
                 style={{
                   background: THEME.bgCard,
@@ -105,13 +113,7 @@ export const CIRculate: React.FC = () => {
                     </span>
                   )}
                 </div>
-                <div
-                  style={{
-                    fontSize: 17,
-                    color: THEME.muted,
-                    fontFamily: THEME.fontFamily,
-                  }}
-                >
+                <div style={{ fontSize: 17, color: THEME.muted, fontFamily: THEME.fontFamily }}>
                   {h.desc}
                 </div>
               </div>
@@ -165,7 +167,7 @@ export const CIRculate: React.FC = () => {
           {/* Stack chips */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
             {stack.map((tech, i) => (
-              <FadeIn key={tech} delay={40 + i * 8} duration={10} translateY={8}>
+              <FadeIn key={tech} delay={50 + i * 12} duration={12} translateY={8}>
                 <div
                   style={{
                     fontSize: 13,

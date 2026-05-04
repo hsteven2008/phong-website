@@ -1,28 +1,34 @@
 import React from "react";
 import { interpolate, useCurrentFrame, spring, useVideoConfig } from "remotion";
-import { THEME } from "../theme";
+import { LIGHT } from "../theme";
 
 const certs = [
-  { name: "CompTIA A+", desc: "Hardware & Software", color: "#ef4444" },
-  { name: "CompTIA Network+", desc: "Networking Fundamentals", color: "#f97316" },
-  { name: "CompTIA Security+", desc: "Security Operations", color: "#eab308" },
-  { name: "CompTIA CIOS", desc: "IT Operations Specialist", color: "#22c55e" },
-  { name: "CompTIA CSIS", desc: "Secure Infrastructure", color: "#06b6d4" },
-  { name: "Linux Essentials", desc: "Linux Fundamentals", color: "#8b5cf6" },
+  { name: "CompTIA A+",        desc: "Hardware & Software",       color: "#ef4444" },
+  { name: "CompTIA Network+",  desc: "Networking Fundamentals",   color: "#f97316" },
+  { name: "CompTIA Security+", desc: "Security Operations",       color: "#eab308" },
+  { name: "CompTIA CIOS",      desc: "IT Operations Specialist",  color: "#22c55e" },
+  { name: "CompTIA CSIS",      desc: "Secure Infrastructure",     color: "#06b6d4" },
+  { name: "Linux Essentials",  desc: "Linux Fundamentals",        color: "#8b5cf6" },
 ];
 
 export const Certs: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
 
-  const titleOpacity = interpolate(frame, [0, 18], [0, 1], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
+
+  const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
       style={{
         width: "100%",
         height: "100%",
-        background: THEME.bg,
+        background: LIGHT.bg,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -32,18 +38,30 @@ export const Certs: React.FC = () => {
         gap: 50,
         position: "relative",
         overflow: "hidden",
+        opacity: fadeIn * exitOpacity,
       }}
     >
+      {/* Background grid */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px),
+            linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
+
       {/* Header */}
-      <div style={{ opacity: titleOpacity, textAlign: "center" }}>
+      <div style={{ opacity: titleOpacity, textAlign: "center", position: "relative", zIndex: 2 }}>
         <div
           style={{
             fontSize: 14,
             fontWeight: 600,
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: THEME.accent,
-            fontFamily: THEME.fontMono,
+            color: LIGHT.accent,
+            fontFamily: LIGHT.fontMono,
             marginBottom: 10,
           }}
         >
@@ -53,8 +71,8 @@ export const Certs: React.FC = () => {
           style={{
             fontSize: 42,
             fontWeight: 700,
-            color: THEME.white,
-            fontFamily: THEME.fontFamily,
+            color: LIGHT.text,
+            fontFamily: LIGHT.fontFamily,
             letterSpacing: "-1px",
           }}
         >
@@ -62,7 +80,7 @@ export const Certs: React.FC = () => {
         </div>
       </div>
 
-      {/* Cert cards */}
+      {/* Cert cards — 30f stagger, all 6 settle well within the 240-frame scene */}
       <div
         style={{
           display: "grid",
@@ -70,11 +88,13 @@ export const Certs: React.FC = () => {
           gap: 24,
           width: "100%",
           maxWidth: 1300,
+          position: "relative",
+          zIndex: 2,
         }}
       >
         {certs.map((cert, i) => {
           const certSpring = spring({
-            frame: frame - (15 + i * 18),
+            frame: frame - (15 + i * 28),
             fps,
             config: { damping: 28, stiffness: 70 },
           });
@@ -84,13 +104,14 @@ export const Certs: React.FC = () => {
               key={cert.name}
               style={{
                 opacity: certSpring,
-                transform: `scale(${interpolate(certSpring, [0, 1], [0.85, 1])}) translateY(${interpolate(certSpring, [0, 1], [20, 0])}px)`,
-                background: THEME.bgCard,
-                border: `1px solid ${THEME.border}`,
+                transform: `scale(${interpolate(certSpring, [0, 1], [0.88, 1])}) translateY(${interpolate(certSpring, [0, 1], [20, 0])}px)`,
+                background: LIGHT.card,
+                border: `1px solid ${LIGHT.border}`,
                 borderRadius: 16,
                 padding: "28px 24px",
                 position: "relative",
                 overflow: "hidden",
+                boxShadow: LIGHT.shadow,
               }}
             >
               {/* Color accent top bar */}
@@ -127,20 +148,14 @@ export const Certs: React.FC = () => {
                 style={{
                   fontSize: 20,
                   fontWeight: 700,
-                  color: THEME.white,
-                  fontFamily: THEME.fontFamily,
+                  color: LIGHT.text,
+                  fontFamily: LIGHT.fontFamily,
                   marginBottom: 6,
                 }}
               >
                 {cert.name}
               </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  color: THEME.muted,
-                  fontFamily: THEME.fontFamily,
-                }}
-              >
+              <div style={{ fontSize: 14, color: LIGHT.muted, fontFamily: LIGHT.fontFamily }}>
                 {cert.desc}
               </div>
             </div>

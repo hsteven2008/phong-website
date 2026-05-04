@@ -4,25 +4,27 @@ import { THEME } from "../theme";
 
 export const CTA: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
 
-  const bgOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
-
+  // bgOpacity acts as the fade-in (starts at 0, reaches 1 by frame 22)
+  const bgOpacity = interpolate(frame, [0, 22], [0, 1], { extrapolateRight: "clamp" });
   const nameSpring = spring({ frame: frame - 5, fps, config: { damping: 30, stiffness: 60 } });
-  const lineSpring = spring({ frame: frame - 20, fps, config: { damping: 40, stiffness: 80 } });
+  const lineSpring = spring({ frame: frame - 22, fps, config: { damping: 40, stiffness: 80 } });
 
-  const emailOpacity = interpolate(frame, [30, 48], [0, 1], { extrapolateRight: "clamp" });
-  const emailY = interpolate(frame, [30, 48], [16, 0], { extrapolateRight: "clamp" });
-
-  const phoneOpacity = interpolate(frame, [45, 62], [0, 1], { extrapolateRight: "clamp" });
-  const phoneY = interpolate(frame, [45, 62], [16, 0], { extrapolateRight: "clamp" });
-
-  const linkedinOpacity = interpolate(frame, [60, 78], [0, 1], { extrapolateRight: "clamp" });
-  const linkedinY = interpolate(frame, [60, 78], [16, 0], { extrapolateRight: "clamp" });
-
-  const taglineOpacity = interpolate(frame, [80, 100], [0, 1], { extrapolateRight: "clamp" });
+  const emailOpacity    = interpolate(frame, [38, 56],   [0, 1], { extrapolateRight: "clamp" });
+  const emailY          = interpolate(frame, [38, 56],   [16, 0], { extrapolateRight: "clamp" });
+  const phoneOpacity    = interpolate(frame, [62, 80],   [0, 1], { extrapolateRight: "clamp" });
+  const phoneY          = interpolate(frame, [62, 80],   [16, 0], { extrapolateRight: "clamp" });
+  const linkedinOpacity = interpolate(frame, [86, 104],  [0, 1], { extrapolateRight: "clamp" });
+  const linkedinY       = interpolate(frame, [86, 104],  [16, 0], { extrapolateRight: "clamp" });
+  const taglineOpacity  = interpolate(frame, [115, 140], [0, 1], { extrapolateRight: "clamp" });
 
   const lineWidth = interpolate(lineSpring, [0, 1], [0, 480]);
+
+  const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
@@ -37,7 +39,7 @@ export const CTA: React.FC = () => {
         gap: 32,
         position: "relative",
         overflow: "hidden",
-        opacity: bgOpacity,
+        opacity: bgOpacity * exitOpacity,
       }}
     >
       {/* Background grid */}
@@ -119,19 +121,11 @@ export const CTA: React.FC = () => {
         </div>
       </div>
 
-      {/* Contact cards */}
-      <div
-        style={{
-          display: "flex",
-          gap: 20,
-          position: "relative",
-          zIndex: 2,
-          marginTop: 10,
-        }}
-      >
+      {/* Contact cards — phone now first to match narration order */}
+      <div style={{ display: "flex", gap: 20, position: "relative", zIndex: 2, marginTop: 10 }}>
         {[
-          { icon: "✉", label: "Email", value: "hsteven2008@gmail.com", opacity: emailOpacity, y: emailY },
-          { icon: "📞", label: "Phone", value: "(832) 641-2959", opacity: phoneOpacity, y: phoneY },
+          { icon: "✉",  label: "Email",    value: "hsteven2008@gmail.com",     opacity: emailOpacity,    y: emailY },
+          { icon: "📞", label: "Phone",    value: "(832) 641-2959",            opacity: phoneOpacity,    y: phoneY },
           { icon: "💼", label: "LinkedIn", value: "linkedin.com/in/pqhoang90", opacity: linkedinOpacity, y: linkedinY },
         ].map((c) => (
           <div
@@ -161,14 +155,7 @@ export const CTA: React.FC = () => {
             >
               {c.label}
             </div>
-            <div
-              style={{
-                fontSize: 16,
-                color: THEME.white,
-                fontFamily: THEME.fontFamily,
-                fontWeight: 500,
-              }}
-            >
+            <div style={{ fontSize: 16, color: THEME.white, fontFamily: THEME.fontFamily, fontWeight: 500 }}>
               {c.value}
             </div>
           </div>

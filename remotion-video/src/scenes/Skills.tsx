@@ -1,8 +1,10 @@
 import React from "react";
-import { interpolate, useCurrentFrame } from "remotion";
-import { THEME } from "../theme";
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { LIGHT } from "../theme";
 import { FadeIn } from "../components/FadeIn";
 
+// Creative Suite and AI tools removed — they confuse IT hiring managers and
+// undermine the cloud/ops positioning. Kept to 4 focused groups in a 2x2 grid.
 const skillGroups = [
   {
     title: "IT Operations & ITSM",
@@ -24,47 +26,58 @@ const skillGroups = [
     icon: "☁",
     items: ["GitHub / Git", "Vercel", "Next.js", "Neon Postgres", "Auth0", "CI/CD", "REST APIs", "PowerShell"],
   },
-  {
-    title: "Creative Suite",
-    icon: "🎨",
-    items: ["Photoshop", "Illustrator", "InDesign", "Video Editing", "Animation"],
-  },
-  {
-    title: "AI-Assisted Tooling",
-    icon: "🤖",
-    items: ["Claude Code", "GitHub Copilot", "ChatGPT", "Prompt engineering", "Code review"],
-  },
 ];
 
 export const Skills: React.FC = () => {
   const frame = useCurrentFrame();
+  const { durationInFrames } = useVideoConfig();
 
-  const titleOpacity = interpolate(frame, [0, 18], [0, 1], { extrapolateRight: "clamp" });
-  const titleY = interpolate(frame, [0, 18], [20, 0], { extrapolateRight: "clamp" });
+  const titleOpacity = interpolate(frame, [0, 20], [0, 1], { extrapolateRight: "clamp" });
+  const titleY = interpolate(frame, [0, 20], [20, 0], { extrapolateRight: "clamp" });
+
+  const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <div
       style={{
         width: "100%",
         height: "100%",
-        background: THEME.bg,
+        background: LIGHT.bg,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "60px 100px",
+        padding: "60px 140px",
         boxSizing: "border-box",
-        gap: 40,
+        gap: 48,
         position: "relative",
         overflow: "hidden",
+        opacity: fadeIn * exitOpacity,
       }}
     >
+      {/* Background grid */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px),
+            linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
+
       {/* Header */}
       <div
         style={{
           opacity: titleOpacity,
           transform: `translateY(${titleY}px)`,
           textAlign: "center",
+          position: "relative",
+          zIndex: 2,
         }}
       >
         <div
@@ -73,8 +86,8 @@ export const Skills: React.FC = () => {
             fontWeight: 600,
             letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: THEME.accent,
-            fontFamily: THEME.fontMono,
+            color: LIGHT.accent,
+            fontFamily: LIGHT.fontMono,
             marginBottom: 10,
           }}
         >
@@ -84,8 +97,8 @@ export const Skills: React.FC = () => {
           style={{
             fontSize: 40,
             fontWeight: 700,
-            color: THEME.white,
-            fontFamily: THEME.fontFamily,
+            color: LIGHT.text,
+            fontFamily: LIGHT.fontFamily,
             letterSpacing: "-1px",
           }}
         >
@@ -93,58 +106,54 @@ export const Skills: React.FC = () => {
         </div>
       </div>
 
-      {/* Grid */}
+      {/* 2×2 grid — focused on IT ops and cloud, no creative/AI noise */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 20,
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: 24,
           width: "100%",
-          maxWidth: 1500,
+          maxWidth: 1300,
+          position: "relative",
+          zIndex: 2,
         }}
       >
         {skillGroups.map((group, gi) => (
-          <FadeIn key={group.title} delay={20 + gi * 15} duration={18} translateY={20}>
+          <FadeIn key={group.title} delay={25 + gi * 40} duration={20} translateY={20}>
             <div
               style={{
-                background: THEME.bgCard,
-                border: `1px solid ${THEME.border}`,
-                borderRadius: 14,
-                padding: "22px 24px",
+                background: LIGHT.card,
+                border: `1px solid ${LIGHT.border}`,
+                borderRadius: 16,
+                padding: "28px 32px",
+                boxShadow: LIGHT.shadow,
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 14,
-                }}
-              >
-                <span style={{ fontSize: 22 }}>{group.icon}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+                <span style={{ fontSize: 26 }}>{group.icon}</span>
                 <span
                   style={{
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: 700,
-                    color: THEME.white,
-                    fontFamily: THEME.fontFamily,
+                    color: LIGHT.text,
+                    fontFamily: LIGHT.fontFamily,
                   }}
                 >
                   {group.title}
                 </span>
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {group.items.map((item) => (
                   <span
                     key={item}
                     style={{
-                      fontSize: 12,
-                      color: THEME.muted,
-                      background: "rgba(148,163,184,0.08)",
-                      border: "1px solid rgba(148,163,184,0.12)",
+                      fontSize: 13,
+                      color: LIGHT.muted,
+                      background: "rgba(37,99,235,0.06)",
+                      border: `1px solid ${LIGHT.border}`,
                       borderRadius: 5,
-                      padding: "3px 9px",
-                      fontFamily: THEME.fontFamily,
+                      padding: "4px 11px",
+                      fontFamily: LIGHT.fontFamily,
                     }}
                   >
                     {item}
