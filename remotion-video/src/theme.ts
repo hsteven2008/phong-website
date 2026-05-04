@@ -11,7 +11,6 @@ export const THEME = {
   fontMono: "'JetBrains Mono', 'Consolas', monospace",
 };
 
-// Light-background variant — used by Tagline, Stats, IronEdge, Skills, Certs, Languages
 export const LIGHT = {
   bg: "#eef2ff",
   card: "#ffffff",
@@ -30,17 +29,18 @@ export const FPS = 30;
 export const WIDTH = 1920;
 export const HEIGHT = 1080;
 
-// Scene timing at 30fps — total 88s = 2640 frames
+// Scene boundaries derived directly from VTT audio timestamps (edge-tts AndrewNeural)
+// Total audio: 128.749s = 3862 frames at 30fps
 export const SCENES = {
-  intro:     { start: 0,    duration: 120 },  // 0:00–0:04 (extended for name readability)
-  tagline:   { start: 120,  duration: 150 },  // 0:04–0:09
-  stats:     { start: 270,  duration: 360 },  // 0:09–0:21
-  ironedge:  { start: 630,  duration: 420 },  // 0:21–0:35
-  circulate: { start: 1050, duration: 360 },  // 0:35–0:47
-  skills:    { start: 1410, duration: 360 },  // 0:47–0:59
-  certs:     { start: 1770, duration: 240 },  // 0:59–1:07 (trimmed — no dead air)
-  languages: { start: 2010, duration: 270 },  // 1:07–1:16
-  cta:       { start: 2280, duration: 360 },  // 1:16–1:28
+  intro:     { start: 0,    duration: 281 },  // entries 1-2
+  tagline:   { start: 281,  duration: 169 },  // entries 3-7
+  stats:     { start: 450,  duration: 380 },  // entries 8-12
+  ironedge:  { start: 830,  duration: 726 },  // entries 13-14
+  circulate: { start: 1556, duration: 540 },  // entries 15-18
+  skills:    { start: 2096, duration: 530 },  // entries 19-21
+  certs:     { start: 2626, duration: 320 },  // entries 22-23
+  languages: { start: 2946, duration: 371 },  // entries 24-25
+  cta:       { start: 3317, duration: 545 },  // entries 26-28
 };
 
-export const TOTAL_FRAMES = 2640; // 88 seconds
+export const TOTAL_FRAMES = 3862; // 128.749 seconds — matches audio exactly

@@ -39,71 +39,19 @@ export const Languages: React.FC = () => {
         opacity: fadeIn * exitOpacity,
       }}
     >
-      {/* Background grid */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px),
-            linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      {/* Subtle glow */}
-      <div
-        style={{
-          position: "absolute",
-          width: 700,
-          height: 400,
-          borderRadius: "50%",
-          background: "radial-gradient(ellipse, rgba(37,99,235,0.08) 0%, transparent 70%)",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          opacity: titleOpacity,
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px), linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
+      <div style={{ position: "absolute", width: 700, height: 400, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(37,99,235,0.08) 0%, transparent 70%)", top: "50%", left: "50%", transform: "translate(-50%, -50%)", opacity: titleOpacity }} />
 
       <div style={{ opacity: titleOpacity, textAlign: "center", position: "relative", zIndex: 2 }}>
-        <div
-          style={{
-            fontSize: 14,
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: LIGHT.accent,
-            fontFamily: LIGHT.fontMono,
-            marginBottom: 10,
-          }}
-        >
-          Languages
-        </div>
-        <div
-          style={{
-            fontSize: 42,
-            fontWeight: 700,
-            color: LIGHT.text,
-            fontFamily: LIGHT.fontFamily,
-            letterSpacing: "-1px",
-            marginBottom: 8,
-          }}
-        >
-          I speak your customer's language.
-        </div>
-        <div style={{ fontSize: 18, color: LIGHT.muted, fontFamily: LIGHT.fontFamily }}>
-          A real differentiator for customer-facing support and global teams.
-        </div>
+        <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: LIGHT.accent, fontFamily: LIGHT.fontMono, marginBottom: 10 }}>Languages</div>
+        <div style={{ fontSize: 42, fontWeight: 700, color: LIGHT.text, fontFamily: LIGHT.fontFamily, letterSpacing: "-1px", marginBottom: 8 }}>I speak your customer's language.</div>
+        <div style={{ fontSize: 18, color: LIGHT.muted, fontFamily: LIGHT.fontFamily }}>A real differentiator for customer-facing support and global teams.</div>
       </div>
 
+      {/* 55-frame stagger — last card (Cantonese) settles before 2nd subtitle line at local 233 */}
       <div style={{ display: "flex", gap: 28, position: "relative", zIndex: 2 }}>
         {languages.map((l, i) => {
-          // 40-frame stagger — each card enters distinctly, Cantonese settles before 2nd subtitle line
-          const cardSpring = spring({
-            frame: frame - (15 + i * 40),
-            fps,
-            config: { damping: 25, stiffness: 65 },
-          });
+          const cardSpring = spring({ frame: frame - (15 + i * 55), fps, config: { damping: 25, stiffness: 65 } });
 
           return (
             <div
@@ -122,58 +70,11 @@ export const Languages: React.FC = () => {
                 boxShadow: LIGHT.shadow,
               }}
             >
-              {/* Color glow top */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 80,
-                  background: `linear-gradient(180deg, ${l.color}18 0%, transparent 100%)`,
-                }}
-              />
-
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 80, background: `linear-gradient(180deg, ${l.color}18 0%, transparent 100%)` }} />
               <div style={{ fontSize: 56, marginBottom: 14 }}>{l.flag}</div>
-              <div
-                style={{
-                  fontSize: 22,
-                  fontWeight: 700,
-                  color: LIGHT.text,
-                  fontFamily: LIGHT.fontFamily,
-                  marginBottom: 4,
-                }}
-              >
-                {l.lang}
-              </div>
-              <div
-                style={{
-                  fontSize: 16,
-                  color: LIGHT.muted,
-                  fontFamily: LIGHT.fontFamily,
-                  marginBottom: 16,
-                  fontStyle: "italic",
-                }}
-              >
-                {l.native}
-              </div>
-              <div
-                style={{
-                  display: "inline-block",
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: l.color,
-                  background: `${l.color}18`,
-                  border: `1px solid ${l.color}44`,
-                  borderRadius: 20,
-                  padding: "4px 14px",
-                  fontFamily: LIGHT.fontMono,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                {l.level}
-              </div>
+              <div style={{ fontSize: 22, fontWeight: 700, color: LIGHT.text, fontFamily: LIGHT.fontFamily, marginBottom: 4 }}>{l.lang}</div>
+              <div style={{ fontSize: 16, color: LIGHT.muted, fontFamily: LIGHT.fontFamily, marginBottom: 16, fontStyle: "italic" }}>{l.native}</div>
+              <div style={{ display: "inline-block", fontSize: 12, fontWeight: 600, color: l.color, background: `${l.color}18`, border: `1px solid ${l.color}44`, borderRadius: 20, padding: "4px 14px", fontFamily: LIGHT.fontMono, letterSpacing: "0.08em", textTransform: "uppercase" }}>{l.level}</div>
             </div>
           );
         })}

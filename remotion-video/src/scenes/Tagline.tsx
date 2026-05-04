@@ -4,12 +4,23 @@ import { LIGHT } from "../theme";
 
 const words = ["Problem Solver.", "Builder.", "Reliable.", "Multilingual.", "Available Now."];
 
+// Slot sizes derived from actual VTT timestamps (scene starts at global frame 281):
+// "Problem solver."  281→321  = local  0→ 40  (40f)
+// "Builder."         321→346  = local 40→ 65  (25f)
+// "Reliable."        346→377  = local 65→ 96  (31f)
+// "Multilingual."    377→412  = local 96→131  (35f)
+// "Available Now."   412→450  = local131→169  (38f)
+const wordTimings = [
+  { start: 0,   end: 40  },
+  { start: 40,  end: 65  },
+  { start: 65,  end: 96  },
+  { start: 96,  end: 131 },
+  { start: 131, end: 169 },
+];
+
 export const Tagline: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
-
-  // 150 frames total, 5 words × 30 frames each — 14 frames at full opacity per word
-  const wordsPerSlot = 30;
 
   const fadeIn = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const exitOpacity = interpolate(frame, [durationInFrames - 22, durationInFrames], [1, 0], {
@@ -32,7 +43,6 @@ export const Tagline: React.FC = () => {
         opacity: fadeIn * exitOpacity,
       }}
     >
-      {/* Background grid */}
       <div
         style={{
           position: "absolute",
@@ -59,15 +69,15 @@ export const Tagline: React.FC = () => {
 
         <div style={{ height: 110, display: "flex", alignItems: "center", justifyContent: "center" }}>
           {words.map((word, i) => {
-            const start = i * wordsPerSlot;
-            const end = start + wordsPerSlot;
+            const { start, end } = wordTimings[i];
+            const fadeLen = Math.min(7, Math.floor((end - start) * 0.25));
             const opacity = interpolate(
               frame,
-              [start, start + 8, end - 8, end],
+              [start, start + fadeLen, end - fadeLen, end],
               [0, 1, 1, 0],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             );
-            const scale = interpolate(frame, [start, start + 8], [0.88, 1], {
+            const scale = interpolate(frame, [start, start + fadeLen], [0.88, 1], {
               extrapolateLeft: "clamp",
               extrapolateRight: "clamp",
             });

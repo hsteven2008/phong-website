@@ -41,63 +41,17 @@ export const Certs: React.FC = () => {
         opacity: fadeIn * exitOpacity,
       }}
     >
-      {/* Background grid */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px),
-            linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px), linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
 
-      {/* Header */}
       <div style={{ opacity: titleOpacity, textAlign: "center", position: "relative", zIndex: 2 }}>
-        <div
-          style={{
-            fontSize: 14,
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: LIGHT.accent,
-            fontFamily: LIGHT.fontMono,
-            marginBottom: 10,
-          }}
-        >
-          Certifications
-        </div>
-        <div
-          style={{
-            fontSize: 42,
-            fontWeight: 700,
-            color: LIGHT.text,
-            fontFamily: LIGHT.fontFamily,
-            letterSpacing: "-1px",
-          }}
-        >
-          Stacked on the fundamentals.
-        </div>
+        <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: LIGHT.accent, fontFamily: LIGHT.fontMono, marginBottom: 10 }}>Certifications</div>
+        <div style={{ fontSize: 42, fontWeight: 700, color: LIGHT.text, fontFamily: LIGHT.fontFamily, letterSpacing: "-1px" }}>Stacked on the fundamentals.</div>
       </div>
 
-      {/* Cert cards — 30f stagger, all 6 settle well within the 240-frame scene */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 24,
-          width: "100%",
-          maxWidth: 1300,
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
+      {/* 6 certs with 40-frame stagger — all visible before narrator finishes listing them */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, width: "100%", maxWidth: 1300, position: "relative", zIndex: 2 }}>
         {certs.map((cert, i) => {
-          const certSpring = spring({
-            frame: frame - (15 + i * 28),
-            fps,
-            config: { damping: 28, stiffness: 70 },
-          });
+          const certSpring = spring({ frame: frame - (15 + i * 40), fps, config: { damping: 28, stiffness: 70 } });
 
           return (
             <div
@@ -114,50 +68,10 @@ export const Certs: React.FC = () => {
                 boxShadow: LIGHT.shadow,
               }}
             >
-              {/* Color accent top bar */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 3,
-                  background: cert.color,
-                  borderRadius: "16px 16px 0 0",
-                }}
-              />
-
-              {/* Shield icon */}
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 12,
-                  background: `${cert.color}22`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 16,
-                  fontSize: 24,
-                }}
-              >
-                🛡
-              </div>
-
-              <div
-                style={{
-                  fontSize: 20,
-                  fontWeight: 700,
-                  color: LIGHT.text,
-                  fontFamily: LIGHT.fontFamily,
-                  marginBottom: 6,
-                }}
-              >
-                {cert.name}
-              </div>
-              <div style={{ fontSize: 14, color: LIGHT.muted, fontFamily: LIGHT.fontFamily }}>
-                {cert.desc}
-              </div>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: cert.color, borderRadius: "16px 16px 0 0" }} />
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: `${cert.color}22`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16, fontSize: 24 }}>🛡</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: LIGHT.text, fontFamily: LIGHT.fontFamily, marginBottom: 6 }}>{cert.name}</div>
+              <div style={{ fontSize: 14, color: LIGHT.muted, fontFamily: LIGHT.fontFamily }}>{cert.desc}</div>
             </div>
           );
         })}

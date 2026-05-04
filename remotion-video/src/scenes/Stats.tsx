@@ -17,12 +17,14 @@ export const Stats: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
-  // 360 frames (12s) — 70-frame stagger gives each stat ~2.3s of solo visibility
+  // Delays match narrator — counter appears when the narrator says each stat.
+  // Scene starts at global 450. VTT: entry9=f506, entry10=f640, entry11=f708, entry12=f776
+  // Local delays: 506-450=56, 640-450=190, 708-450=258, 776-450=326
   const stats = [
-    { delay: 30,  target: 95,  suffix: "%", label: "First-Contact Resolution" },
-    { delay: 100, target: 200, suffix: "+", label: "Users Supported" },
-    { delay: 170, target: 6,   suffix: "",  label: "CompTIA Certifications" },
-    { delay: 240, target: 4,   suffix: "",  label: "Languages Spoken" },
+    { delay: 55,  target: 95,  suffix: "%", label: "First-Contact Resolution" },
+    { delay: 188, target: 200, suffix: "+", label: "Users Supported" },
+    { delay: 256, target: 6,   suffix: "",  label: "CompTIA Certifications" },
+    { delay: 324, target: 4,   suffix: "",  label: "Languages Spoken" },
   ];
 
   return (
@@ -41,83 +43,22 @@ export const Stats: React.FC = () => {
         opacity: fadeIn * exitOpacity,
       }}
     >
-      {/* Top accent bar */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 3,
-          background: `linear-gradient(90deg, transparent, ${LIGHT.accent}, transparent)`,
-        }}
-      />
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, transparent, ${LIGHT.accent}, transparent)` }} />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px), linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`, backgroundSize: "80px 80px" }} />
 
-      {/* Background grid */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `linear-gradient(${LIGHT.grid} 1px, transparent 1px),
-            linear-gradient(90deg, ${LIGHT.grid} 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
-      />
-
-      <div
-        style={{
-          opacity: titleOpacity,
-          transform: `translateY(${titleY}px)`,
-          textAlign: "center",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div
-          style={{
-            fontSize: 14,
-            fontWeight: 600,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: LIGHT.accent,
-            fontFamily: LIGHT.fontMono,
-            marginBottom: 12,
-          }}
-        >
+      <div style={{ opacity: titleOpacity, transform: `translateY(${titleY}px)`, textAlign: "center", position: "relative", zIndex: 2 }}>
+        <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: LIGHT.accent, fontFamily: LIGHT.fontMono, marginBottom: 12 }}>
           By the numbers
         </div>
-        <div
-          style={{
-            fontSize: 42,
-            fontWeight: 700,
-            color: LIGHT.text,
-            fontFamily: LIGHT.fontFamily,
-            letterSpacing: "-1px",
-          }}
-        >
+        <div style={{ fontSize: 42, fontWeight: 700, color: LIGHT.text, fontFamily: LIGHT.fontFamily, letterSpacing: "-1px" }}>
           Results that speak for themselves.
         </div>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          gap: 80,
-          alignItems: "flex-start",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
+      <div style={{ display: "flex", gap: 80, alignItems: "flex-start", position: "relative", zIndex: 2 }}>
         {stats.map((s) => (
           <FadeIn key={s.label} delay={s.delay} duration={20} translateY={20}>
-            <AnimatedCounter
-              delay={s.delay}
-              target={s.target}
-              suffix={s.suffix}
-              label={s.label}
-              color={LIGHT.accent}
-              labelColor={LIGHT.muted}
-            />
+            <AnimatedCounter delay={s.delay} target={s.target} suffix={s.suffix} label={s.label} color={LIGHT.accent} labelColor={LIGHT.muted} />
           </FadeIn>
         ))}
       </div>
