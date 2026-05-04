@@ -12,11 +12,24 @@ Plain HTML + CSS + minimal JS. **No build step** — `index.html` runs directly 
 
 ## Files
 
-- `index.html` — single-page. Sections: Hero, About, Experience, Skills, Certifications, Creative (with a "Selected projects" sub-grid of 7 cards), Contact. Inline `<head>` script sets `data-theme="dark"` before paint to prevent FOUC.
+- `index.html` — single-page. Sections: Hero, About, **Profile Video**, Experience, Skills, Certifications, Creative (with a "Selected projects" sub-grid of 7 cards), Contact. Inline `<head>` script sets `data-theme="dark"` before paint to prevent FOUC.
 - `styles.css` — full design system as CSS variables in `:root`, with a `[data-theme="dark"]` block that overrides the palette. Light base: white + deep-navy dark sections + blue (`#2563eb`) accent. Dark base: deep navy with `#60a5fa` accent. Animations at the bottom: hero entrance stagger, photo float/glow, `.reveal` / `.reveal-stagger` scroll fades, project modal styles (image, YouTube button, chips). `prefers-reduced-motion` kills all motion.
 - `script.js` — sticky-nav scroll state, mobile hamburger, theme toggle (persists to `localStorage`, follows system preference until user picks), IntersectionObserver for `.reveal`/`.reveal-stagger`, project-detail modal (`projectData` object keyed by `data-project` attribute — each entry has `tag`, `title`, `about`, `process`, `tools[]`, and optional `image` and `youtubeUrl` fields), auto-update copyright year. Self-invoking function, no dependencies.
 - `assets/profile.jpg` (12 KB) — cropped headshot.
-- `assets/profile-full.jpg` (76 KB) — full headshot, used in hero.
+- `assets/profile-full.jpg` (76 KB) — full headshot, used in hero and as video poster.
+- `assets/phong-profile.mp4` (5.6 MB) — 80-second 1920×1080 profile video. Rendered from `remotion-video/`. Do not edit manually; re-render via Remotion if changes needed.
+
+## Profile Video (Remotion)
+
+The video is built with **Remotion** in `remotion-video/`. It's a standalone Node project — separate from the main site's no-build-step philosophy.
+
+- **To preview:** `cd remotion-video && npm run preview` → opens Remotion Studio in browser at localhost
+- **To re-render:** `cd remotion-video && npm run render` → outputs to `remotion-video/out/phong-profile.mp4`, then copy to `assets/`
+- **Scene file locations:** `remotion-video/src/scenes/` — one `.tsx` file per scene
+- **Timing:** `remotion-video/src/theme.ts` — all scene start/duration frames are defined here (30fps, 2400 frames = 80s)
+- **Scenes in order:** Intro → Tagline → Stats → IronEdge → CIRculate → Skills → Certs → Languages → CTA
+- **Voiceover:** Drop `voiceover.mp3` into `remotion-video/public/` to add audio (slot is already wired in `ProfileVideo.tsx`)
+- `remotion-video/out/` is gitignored — rendered video lives in `assets/` only
 
 ## Design intent
 
