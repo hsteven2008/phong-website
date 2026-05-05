@@ -1,6 +1,6 @@
 # Phong's Website
 
-Static personal site for Phong Hoang, positioning him as a **Cloud Support / IT Operations Engineer**. Replaces the older Webflow creative-portfolio site at `phong-hoangs-site.webflow.io`.
+Static personal site for Phong Hoang. Uses an **open-role positioning strategy** — skills and experience are foregrounded so employers self-identify the right fit, rather than targeting a single job title. Replaces the older Webflow creative-portfolio site at `phong-hoangs-site.webflow.io`.
 
 ## Stack
 
@@ -33,11 +33,12 @@ The video is built with **Remotion** in `remotion-video/`. It's a standalone Nod
 
 ## Design intent
 
-- Lead with **Cloud Support / IT Ops** positioning, not creative work.
-- Surface the cert stack early (it's a real differentiator for the lane).
+- **Open-role strategy** (as of May 2026): About and Contact sections use open-ended language — "the right opportunity" rather than a specific title. Let employers decide the fit.
+- Lead with IT/cloud skills, not creative work. Surface certifications early — real differentiator.
 - Show experience timeline with concrete metrics (95% FCR, 200+ users, 100+ employees).
 - Keep a **Creative Work** section as secondary — for design-adjacent applications, since Adobe CC is still on the resume.
-- Multilingual (EN/VI/ZH/Cantonese) is highlighted as an accent card in skills — real differentiator for Houston-area roles.
+- Multilingual (EN/VI/Cantonese/Mandarin) highlighted as accent card in skills — real differentiator for Houston-area roles.
+- Work model: open to Onsite, Hybrid, or Remote.
 
 ## Content sources
 
