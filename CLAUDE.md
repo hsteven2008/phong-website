@@ -53,7 +53,7 @@ Same honesty rules as the resume:
 - No Bash scripting on skills.
 - No claims about Azure / AWS production work he hasn't done. He has Entra ID / Azure AD / Intune from IronEdge MSP — those are listed.
 - Don't claim "Architected" on the CIRculate MVP — say "Built and shipped."
-- Venti Air title is **Graphic Designer**. Don't reframe.
+- Venti Air title is **Operations & Design Coordinator**. Updated from "Graphic Designer" to match the resume (May 2026).
 
 ## Deployment
 
